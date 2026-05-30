@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Track your homemade food orders and manage subscriptions with AkshayFeast.">
+    <meta name="keywords" content="my orders, food orders, subscriptions, tiffin service">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/orders.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="browse.html">Browse Cooks</a>
+                <a href="orders.html">My Orders</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">My Orders & Subscriptions</h1>
+                    <p class="page-subtitle">Track your orders and manage meal subscriptions</p>
+                </div>
+                <div class="order-details">
+                    <div class="order-detail">
+                        <div class="order-detail-label">Cook</div>
+                        <div class="order-detail-value">Sharma's Kitchen</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Plan</div>
+                        <div class="order-detail-value">Weekly Lunch</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Duration</div>
+                        <div class="order-detail-value">Jan 15 - Feb 15</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Total Paid</div>
+                        <div class="order-detail-value">₹3,360</div>
+                    </div>
+                </div>
+                <div class="order-progress">
+                    <div class="progress-info">
+                        <span>18 of 30 days completed</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 60%"></div>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <button class="btn btn-secondary btn-small">Pause Subscription</button>
+                    <button class="btn btn-secondary btn-small">Contact Cook</button>
+                    <button class="btn btn-primary btn-small">Renew</button>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-id">#SUB-2024-002</div>
+                    <div class="order-status status-confirmed">Active</div>
+                </div>
+                <div class="order-details">
+                    <div class="order-detail">
+                        <div class="order-detail-label">Cook</div>
+                        <div class="order-detail-value">Mom's Recipes</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Plan</div>
+                        <div class="order-detail-value">Monthly Dinner</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Duration</div>
+                        <div class="order-detail-value">Feb 1 - Mar 1</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Total Paid</div>
+                        <div class="order-detail-value">₹4,500</div>
+                    </div>
+                </div>
+                <div class="order-progress">
+                    <div class="progress-info">
+                        <span>5 of 30 days completed</span>
+                        <span>17%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 17%"></div>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <button class="btn btn-secondary btn-small">Pause Subscription</button>
+                    <button class="btn btn-secondary btn-small">Contact Cook</button>
+                    <button class="btn btn-primary btn-small">Renew</button>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-id">#SUB-2024-003</div>
+                    <div class="order-status status-pending">Pending Approval</div>
+                </div>
+                <div class="order-details">
+                    <div class="order-detail">
+                        <div class="order-detail-label">Cook</div>
+                        <div class="order-detail-value">Homely Meals</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Plan</div>
+                        <div class="order-detail-value">Daily Lunch</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Start Date</div>
+                        <div class="order-detail-value">Feb 5, 2024</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Amount</div>
+                        <div class="order-detail-value">₹3,000 (30 days)</div>
+                    </div>
+                </div>
+                <div class="notification notification-warning">
+                    <strong>⏳ Waiting for cook approval</strong> - Request sent on Jan 29, 2024
+                </div>
+                <div class="order-actions">
+                    <button class="btn btn-delete btn-small">Cancel Request</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="orders-section hidden">
+            <h2>Past Orders</h2>
+            
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-id">#ORD-2023-045</div>
+                    <div class="order-status status-completed">Completed</div>
+                </div>
+                <div class="order-details">
+                    <div class="order-detail">
+                        <div class="order-detail-label">Cook</div>
+                        <div class="order-detail-value">Punjabi Dhaba</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Plan</div>
+                        <div class="order-detail-value">Weekly Lunch</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Period</div>
+                        <div class="order-detail-value">Dec 1 - Dec 31, 2023</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Total Paid</div>
+                        <div class="order-detail-value">₹1,260</div>
+                    </div>
+                </div>
+                <div class="order-progress">
+                    <div class="progress-info">
+                        <span>Completed • 30 of 30 days</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <button class="btn btn-primary btn-small">Reorder</button>
+                    <button class="btn btn-secondary btn-small">Leave Review</button>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-id">#ORD-2023-044</div>
+                    <div class="order-status status-completed">Completed</div>
+                </div>
+                <div class="order-details">
+                    <div class="order-detail">
+                        <div class="order-detail-label">Cook</div>
+                        <div class="order-detail-value">Healthy Bites</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Plan</div>
+                        <div class="order-detail-value">Monthly Dinner</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Period</div>
+                        <div class="order-detail-value">Nov 1 - Nov 30, 2023</div>
+                    </div>
+                    <div class="order-detail">
+                        <div class="order-detail-label">Total Paid</div>
+                        <div class="order-detail-value">₹6,000</div>
+                    </div>
+                </div>
+                <div class="order-progress">
+                    <div class="progress-info">
+                        <span>Completed • 30 of 30 days</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="order-actions">
+                    <button class="btn btn-primary btn-small">Reorder</button>
+                    <button class="btn btn-secondary btn-small">Leave Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Customers</h4>
+                    <ul>
+                        <li><a href="browse.html">Browse Cooks</a></li>
+                        <li><a href="orders.html">My Orders</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Customer Support</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/subscriptions.js"></script>
+    <script src="../assets/js/user-orders.js"></script>
+</body>
+</html>
+
+

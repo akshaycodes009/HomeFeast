@@ -1,0 +1,436 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Manage your profile information and preferences on AkshayFeast.">
+    <meta name="keywords" content="user profile, account settings, preferences, tiffin service">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="browse.html">Browse Cooks</a>
+                <a href="orders.html">My Orders</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">My Profile</h1>
+                    <p class="page-subtitle">Manage your personal information and preferences</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="editProfile()">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profile Overview -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Profile Information</h2>
+                </div>
+                
+                <div class="profile-overview">
+                    <div class="profile-avatar-section">
+                        <img src="../assets/images/default-avatar.jpg" alt="Profile Avatar" class="profile-avatar">
+                        <button class="btn btn-secondary btn-sm" onclick="changeAvatar()">
+                            <i class="fas fa-camera"></i> Change Photo
+                        </button>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <div class="profile-info-grid">
+                            <div class="profile-info-item">
+                                <label>Full Name</label>
+                                <p class="profile-value">Akshay Kumar</p>
+                            </div>
+                            <div class="profile-info-item">
+                                <label>Email Address</label>
+                                <p class="profile-value">akshay@example.com</p>
+                            </div>
+                            <div class="profile-info-item">
+                                <label>Phone Number</label>
+                                <p class="profile-value">+91 98765 43210</p>
+                            </div>
+                            <div class="profile-info-item">
+                                <label>Member Since</label>
+                                <p class="profile-value">January 15, 2026</p>
+                            </div>
+                            <div class="profile-info-item">
+                                <label>Delivery Address</label>
+                                <p class="profile-value">123 Main Street, Koramangala, Bangalore - 560034</p>
+                            </div>
+                            <div class="profile-info-item">
+                                <label>Preferred Meal Type</label>
+                                <p class="profile-value">Vegetarian</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Dietary Preferences</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="editPreferences()">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                </div>
+                
+                <div class="preferences-grid">
+                    <div class="preference-card">
+                        <div class="preference-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="preference-info">
+                            <h4>Meal Type</h4>
+                            <p>Vegetarian</p>
+                        </div>
+                    </div>
+                    
+                    <div class="preference-card">
+                        <div class="preference-icon">
+                            <i class="fas fa-pepper-hot"></i>
+                        </div>
+                        <div class="preference-info">
+                            <h4>Spice Level</h4>
+                            <p>Medium</p>
+                        </div>
+                    </div>
+                    
+                    <div class="preference-card">
+                        <div class="preference-icon">
+                            <i class="fas fa-bread-slice"></i>
+                        </div>
+                        <div class="preference-info">
+                            <h4>Preferred Cuisines</h4>
+                            <p>North Indian, South Indian</p>
+                        </div>
+                    </div>
+                    
+                    <div class="preference-card">
+                        <div class="preference-icon">
+                            <i class="fas fa-allergies"></i>
+                        </div>
+                        <div class="preference-info">
+                            <h4>Allergies</h4>
+                            <p>None</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Order Statistics -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Order Statistics</h2>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">Total Orders</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-value">4.8</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Favorite Cooks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Saved Recipes</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Favorite Cooks -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Favorite Cooks</h2>
+                    <a href="browse.html" class="btn btn-secondary">Browse More</a>
+                </div>
+                
+                <div class="cooks-grid">
+                    <div class="cook-card">
+                        <img src="../assets/images/cook1.jpg" alt="Cook" class="cook-avatar">
+                        <div class="cook-info">
+                            <h4>Sharma's Kitchen</h4>
+                            <div class="cook-rating">⭐ 4.8 (124 reviews)</div>
+                            <p>📍 Koramangala • 2.5 km away</p>
+                            <p>North Indian • Vegetarian</p>
+                            <div class="cook-price">₹120/day</div>
+                        </div>
+                        <div class="cook-actions">
+                            <button class="btn btn-primary btn-sm" onclick="viewCookProfile('Sharma\'s Kitchen')">View Profile</button>
+                            <button class="btn btn-danger btn-sm" onclick="removeFavorite('CK001')">Remove</button>
+                        </div>
+                    </div>
+
+                    <div class="cook-card">
+                        <img src="../assets/images/cook2.jpg" alt="Cook" class="cook-avatar">
+                        <div class="cook-info">
+                            <h4>Mom's Recipes</h4>
+                            <div class="cook-rating">⭐ 4.7 (89 reviews)</div>
+                            <p>📍 Indiranagar • 3.2 km away</p>
+                            <p>South Indian • Both</p>
+                            <div class="cook-price">₹150/day</div>
+                        </div>
+                        <div class="cook-actions">
+                            <button class="btn btn-primary btn-sm" onclick="viewCookProfile('Mom\'s Recipes')">View Profile</button>
+                            <button class="btn btn-danger btn-sm" onclick="removeFavorite('CK002')">Remove</button>
+                        </div>
+                    </div>
+
+                    <div class="cook-card">
+                        <img src="../assets/images/cook3.jpg" alt="Cook" class="cook-avatar">
+                        <div class="cook-info">
+                            <h4>Homely Meals</h4>
+                            <div class="cook-rating">⭐ 4.9 (156 reviews)</div>
+                            <p>📍 Jayanagar • 4.1 km away</p>
+                            <p>Maharashtrian • Vegetarian</p>
+                            <div class="cook-price">₹100/day</div>
+                        </div>
+                        <div class="cook-actions">
+                            <button class="btn btn-primary btn-sm" onclick="viewCookProfile('Homely Meals')">View Profile</button>
+                            <button class="btn btn-danger btn-sm" onclick="removeFavorite('CK003')">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Activity</h2>
+                    <a href="orders.html" class="btn btn-secondary">View All Orders</a>
+                </div>
+                
+                <div class="activity-timeline">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Order Placed</h4>
+                            <p>Ordered from Sharma's Kitchen</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Review Submitted</h4>
+                            <p>Rated Mom's Recipes 5 stars</p>
+                            <span class="activity-time">Yesterday</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Added to Favorites</h4>
+                            <p>Added Homely Meals to favorites</p>
+                            <span class="activity-time">3 days ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-edit"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Profile Updated</h4>
+                            <p>Updated delivery address</p>
+                            <span class="activity-time">1 week ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Customers</h4>
+                    <ul>
+                        <li><a href="browse.html">Browse Cooks</a></li>
+                        <li><a href="orders.html">My Orders</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Customer Support</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Profile management functions
+        function editProfile() {
+            console.log('Editing profile...');
+            // Implement edit profile logic
+        }
+
+        function changeAvatar() {
+            console.log('Changing avatar...');
+            // Implement avatar change logic
+        }
+
+        function editPreferences() {
+            console.log('Editing preferences...');
+            // Implement edit preferences logic
+        }
+
+
+        function viewCookProfile(cookNameOrId) {
+            const cookKey = mapCookToKey(cookNameOrId);
+            window.location.href = `cook-profile.html?cook=${encodeURIComponent(cookKey)}`;
+        }
+
+        function mapCookToKey(cookNameOrId) {
+            const cookIdToKey = {
+                'CK001': 'sharmas-kitchen',
+                'CK002': 'moms-recipes',
+                'CK003': 'homely-meals'
+            };
+
+            if (cookIdToKey[cookNameOrId]) return cookIdToKey[cookNameOrId];
+            return slugifyCookName(String(cookNameOrId || ''));
+        }
+
+        function slugifyCookName(name) {
+            const cleaned = name
+                .toLowerCase()
+                .replace(/[''']/g, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            return cleaned || 'sharmas-kitchen';
+        }
+
+        function removeFavorite(cookId) {
+            if (confirm('Are you sure you want to remove this cook from favorites?')) {
+                console.log('Removing favorite:', cookId);
+                // Implement remove favorite logic
+            }
+        }
+
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Load user data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(sessionStorage.getItem('user'));
+            if (user) {
+                // Update profile information with user data
+                console.log('Loading user profile data:', user);
+            }
+        });
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,555 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Complaints - AkshayFeast Admin | Homemade Tiffin Service</title>
+    <meta name="description" content="Handle and resolve user complaints, track issues, and manage customer support on AkshayFeast platform.">
+    <meta name="keywords" content="admin complaints, customer support, issue resolution, homemade food, tiffin service">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/admin-enhanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="complaint-management-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast Admin</h2>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="users.html">Users</a>
+                <a href="cooks.html">Cooks</a>
+                <a href="orders.html">Orders</a>
+                <a href="complaints.html" class="active">Complaints</a>
+                <a href="reports.html">Reports</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutAdmin()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Manage Complaints 💬</h1>
+                    <p class="page-subtitle">Handle and resolve user complaints and issues</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="exportComplaintData()">
+                        <i class="fas fa-download"></i> Export Report
+                    </button>
+                    <button class="btn btn-secondary" onclick="generateResponseTemplates()">
+                        <i class="fas fa-file-alt"></i> Response Templates
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Total Complaints</div>
+                    <div class="stat-change negative">+3 today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Pending Resolution</div>
+                    <div class="stat-change negative">Need attention</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value">16</div>
+                    <div class="stat-label">Resolved Today</div>
+                    <div class="stat-change positive">+67% rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-value">2.4 hrs</div>
+                    <div class="stat-label">Avg Resolution Time</div>
+                    <div class="stat-change positive">-30 min improvement</div>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Search & Filters</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="resetFilters()">Reset All</button>
+                </div>
+                
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="complaintSearch">Search Complaints</label>
+                        <input type="text" id="complaintSearch" placeholder="Enter complaint ID, user email, or cook name...">
+                    </div>
+                    <div class="form-group">
+                        <label for="statusFilter">Status</label>
+                        <select id="statusFilter">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="investigating">Investigating</option>
+                            <option value="resolved">Resolved</option>
+                            <option value="closed">Closed</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="priorityFilter">Priority</label>
+                        <select id="priorityFilter">
+                            <option value="">All Priorities</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryFilter">Category</label>
+                        <select id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="food-quality">Food Quality</option>
+                            <option value="delivery">Delivery Issues</option>
+                            <option value="payment">Payment Issues</option>
+                            <option value="service">Service Issues</option>
+                            <option value="cook-behavior">Cook Behavior</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+                </div>
+            </div>
+
+            <!-- High Priority Complaints -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">High Priority Complaints</h2>
+                    <span class="badge badge-danger">3 Urgent</span>
+                </div>
+                
+                <div class="orders-grid">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Food Quality Issue - Order #ORD-2024-156</h4>
+                                <p class="order-date">Reported 2 hours ago</p>
+                            </div>
+                            <span class="order-status status-pending">High Priority</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Akshay Kumar (akshay.kumar@email.com)</h5>
+                            <p><strong>Cook:</strong> Sharma's Kitchen • <strong>Order Date:</strong> Jan 29, 2026</p>
+                            <p><strong>Issue:</strong> Food was cold and tasted stale. Found hair in the food.</p>
+                            <p><strong>Category:</strong> Food Quality • <strong>Priority:</strong> High</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="investigateComplaint('COMP001')">Investigate</button>
+                            <button class="btn btn-secondary btn-sm" onclick="contactUser('COMP001')">Contact User</button>
+                            <button class="btn btn-danger btn-sm" onclick="escalateComplaint('COMP001')">Escalate</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Delivery Delay - Order #ORD-2024-158</h4>
+                                <p class="order-date">Reported 4 hours ago</p>
+                            </div>
+                            <span class="order-status status-pending">High Priority</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Priya Sharma (priya.sharma@email.com)</h5>
+                            <p><strong>Cook:</strong> Mom's Recipes • <strong>Order Date:</strong> Jan 29, 2026</p>
+                            <p><strong>Issue:</strong> Order delivered 2 hours late, food was cold. Driver was unresponsive.</p>
+                            <p><strong>Category:</strong> Delivery Issues • <strong>Priority:</strong> High</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="investigateComplaint('COMP002')">Investigate</button>
+                            <button class="btn btn-secondary btn-sm" onclick="contactUser('COMP002')">Contact User</button>
+                            <button class="btn btn-success btn-sm" onclick="processRefund('COMP002')">Process Refund</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Cook Behavior Issue - Order #ORD-2024-154</h4>
+                                <p class="order-date">Reported 6 hours ago</p>
+                            </div>
+                            <span class="order-status status-pending">High Priority</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Amit Patel (amit.patel@email.com)</h5>
+                            <p><strong>Cook:</strong> Punjabi Dhaba • <strong>Order Date:</strong> Jan 28, 2026</p>
+                            <p><strong>Issue:</strong> Cook was rude when asked about special dietary requirements.</p>
+                            <p><strong>Category:</strong> Cook Behavior • <strong>Priority:</strong> High</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="investigateComplaint('COMP003')">Investigate</button>
+                            <button class="btn btn-secondary btn-sm" onclick="contactCook('COMP003')">Contact Cook</button>
+                            <button class="btn btn-warning btn-sm" onclick="warnCook('COMP003')">Issue Warning</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Complaints Table -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">All Complaints</h2>
+                    <div class="performance-summary">
+                        <span class="performance-stat">24 total</span>
+                        <span class="performance-change">8 pending resolution</span>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Complaint ID</th>
+                                <th>User</th>
+                                <th>Cook</th>
+                                <th>Category</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#COMP-001</strong></td>
+                                <td>Akshay Kumar</td>
+                                <td>Sharma's Kitchen</td>
+                                <td>Food Quality</td>
+                                <td><span class="badge badge-danger">High</span></td>
+                                <td><span class="order-status status-pending">Pending</span></td>
+                                <td>Jan 29, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewComplaint('COMP-001')">View</button>
+                                        <button class="btn btn-success btn-sm" onclick="resolveComplaint('COMP-001')">Resolve</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="escalateComplaint('COMP-001')">Escalate</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#COMP-002</strong></td>
+                                <td>Priya Sharma</td>
+                                <td>Mom's Recipes</td>
+                                <td>Delivery Issues</td>
+                                <td><span class="badge badge-danger">High</span></td>
+                                <td><span class="order-status status-pending">Pending</span></td>
+                                <td>Jan 29, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewComplaint('COMP-002')">View</button>
+                                        <button class="btn btn-success btn-sm" onclick="resolveComplaint('COMP-002')">Resolve</button>
+                                        <button class="btn btn-info btn-sm" onclick="processRefund('COMP-002')">Refund</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#COMP-003</strong></td>
+                                <td>Amit Patel</td>
+                                <td>Punjabi Dhaba</td>
+                                <td>Cook Behavior</td>
+                                <td><span class="badge badge-danger">High</span></td>
+                                <td><span class="order-status status-pending">Pending</span></td>
+                                <td>Jan 28, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewComplaint('COMP-003')">View</button>
+                                        <button class="btn btn-success btn-sm" onclick="resolveComplaint('COMP-003')">Resolve</button>
+                                        <button class="btn btn-warning btn-sm" onclick="warnCook('COMP-003')">Warning</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#COMP-004</strong></td>
+                                <td>Neha Singh</td>
+                                <td>Homely Meals</td>
+                                <td>Payment Issues</td>
+                                <td><span class="badge badge-warning">Medium</span></td>
+                                <td><span class="order-status status-confirmed">Investigating</span></td>
+                                <td>Jan 28, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewComplaint('COMP-004')">View</button>
+                                        <button class="btn btn-success btn-sm" onclick="resolveComplaint('COMP-004')">Resolve</button>
+                                        <button class="btn btn-info btn-sm" onclick="contactPayment('COMP-004')">Payment</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#COMP-005</strong></td>
+                                <td>Rohit Gupta</td>
+                                <td>Healthy Bites</td>
+                                <td>Service Issues</td>
+                                <td><span class="badge badge-warning">Medium</span></td>
+                                <td><span class="order-status status-delivered">Resolved</span></td>
+                                <td>Jan 27, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewComplaint('COMP-005')">View</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="followUp('COMP-005')">Follow Up</button>
+                                        <button class="btn btn-info btn-sm" onclick="viewResolution('COMP-005')">Resolution</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Resolution Metrics -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Resolution Metrics</h2>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-title">Resolution Rate</div>
+                        <div class="report-value">87%</div>
+                        <div class="report-subtitle">This month</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Avg Response Time</div>
+                        <div class="report-value">45 min</div>
+                        <div class="report-subtitle">First response</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Customer Satisfaction</div>
+                        <div class="report-value">4.2/5</div>
+                        <div class="report-subtitle">Post-resolution</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Refund Processed</div>
+                        <div class="report-value">₹12,450</div>
+                        <div class="report-subtitle">This month</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="btn btn-secondary" onclick="previousPage()">Previous</button>
+                <span>Page 1 of 5</span>
+                <button class="btn btn-secondary" onclick="nextPage()">Next</button>
+            </div>
+
+                    </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast Admin</h3>
+                    </div>
+                    <p>Managing homemade food delivery platform efficiently</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="users.html">User Management</a></li>
+                        <li><a href="cooks.html">Cook Management</a></li>
+                        <li><a href="orders.html">Order Monitoring</a></li>
+                        <li><a href="#">Admin Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Complaint Management</h4>
+                    <ul>
+                        <li><a href="#high-priority">High Priority</a></li>
+                        <li><a href="#all-complaints">All Complaints</a></li>
+                        <li><a href="#">Response Templates</a></li>
+                        <li><a href="#">Resolution Guidelines</a></li>
+                        <li><a href="#">Support Training</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> admin@AkshayFeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> 24/7 Support</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Admin Complaints functionality
+        function investigateComplaint(complaintId) {
+            console.log('Investigating complaint:', complaintId);
+            showMessage('Opening investigation details...', 'info');
+        }
+
+        function viewComplaint(complaintId) {
+            console.log('Viewing complaint:', complaintId);
+            showMessage('Opening complaint details...', 'info');
+        }
+
+        function resolveComplaint(complaintId) {
+            if (confirm('Mark this complaint as resolved?')) {
+                console.log('Resolving complaint:', complaintId);
+                showMessage('Complaint resolved successfully', 'success');
+            }
+        }
+
+        function escalateComplaint(complaintId) {
+            if (confirm('Escalate this complaint to senior management?')) {
+                console.log('Escalating complaint:', complaintId);
+                showMessage('Complaint escalated successfully', 'warning');
+            }
+        }
+
+        function contactUser(complaintId) {
+            console.log('Contacting user for complaint:', complaintId);
+            showMessage('Opening user contact form...', 'info');
+        }
+
+        function contactCook(complaintId) {
+            console.log('Contacting cook for complaint:', complaintId);
+            showMessage('Opening cook contact form...', 'info');
+        }
+
+        function warnCook(complaintId) {
+            if (confirm('Issue warning to cook? This will be recorded in their profile.')) {
+                console.log('Warning cook for complaint:', complaintId);
+                showMessage('Warning issued to cook successfully', 'warning');
+            }
+        }
+
+        function processRefund(complaintId) {
+            if (confirm('Process refund for this complaint?')) {
+                console.log('Processing refund for complaint:', complaintId);
+                showMessage('Refund processed successfully', 'success');
+            }
+        }
+
+        function contactPayment(complaintId) {
+            console.log('Contacting payment team for complaint:', complaintId);
+            showMessage('Escalating to payment team...', 'info');
+        }
+
+        function followUp(complaintId) {
+            console.log('Following up on resolved complaint:', complaintId);
+            showMessage('Opening follow-up form...', 'info');
+        }
+
+        function viewResolution(complaintId) {
+            console.log('Viewing resolution details:', complaintId);
+            showMessage('Opening resolution details...', 'info');
+        }
+
+        function applyFilters() {
+            console.log('Applying filters...');
+            showMessage('Filters applied successfully', 'success');
+        }
+
+        function resetFilters() {
+            document.getElementById('complaintSearch').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('priorityFilter').value = '';
+            document.getElementById('categoryFilter').value = '';
+            showMessage('Filters reset successfully', 'info');
+        }
+
+        function exportComplaintData() {
+            console.log('Exporting complaint data...');
+            showMessage('Exporting complaint report...', 'info');
+        }
+
+        function generateResponseTemplates() {
+            console.log('Opening response templates...');
+            showMessage('Opening response templates...', 'info');
+        }
+
+        function previousPage() {
+            console.log('Going to previous page...');
+        }
+
+        function nextPage() {
+            console.log('Going to next page...');
+        }
+
+        function logoutAdmin() {
+            if (confirm('Are you sure you want to logout from admin panel?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage && !existingMessage.classList.contains('notification-warning')) {
+                existingMessage.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
+                    
+
+

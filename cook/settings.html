@@ -1,0 +1,761 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Manage your account settings, preferences, and security options with AkshayFeast.">
+    <meta name="keywords" content="cook settings, account preferences, security settings, notifications">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/settings-enhanced.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="menu.html">Manage Menu</a>
+                <a href="orders.html">Orders</a>
+                <a href="earnings.html">Earnings</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Settings ⚙️</h1>
+                    <p class="page-subtitle">Manage your account settings and preferences</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.location.href='profile.html'">
+                        <i class="fas fa-arrow-left"></i> Back to Profile
+                    </button>
+                </div>
+            </div>
+
+            <!-- Settings Container -->
+            <div class="content-section">
+                <div class="settings-tabs">
+                    <button class="settings-tab active" data-section="general">General</button>
+                    <button class="settings-tab" data-section="business">Business</button>
+                    <button class="settings-tab" data-section="notifications">Notifications</button>
+                    <button class="settings-tab" data-section="privacy">Privacy</button>
+                    <button class="settings-tab" data-section="security">Security</button>
+                </div>
+
+                <!-- General Settings -->
+                <div class="settings-section active" id="general">
+                    <div class="settings-card">
+                        <h3>General Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="cookName">Your Name</label>
+                                <input type="text" id="cookName" value="Mrs. Sharma" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cookEmail">Email Address</label>
+                                <input type="email" id="cookEmail" value="sharma.kitchen@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cookPhone">Phone Number</label>
+                                <input type="tel" id="cookPhone" value="+91 98765 43210" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="language">Preferred Language</label>
+                                <select id="language">
+                                    <option value="en" selected>English</option>
+                                    <option value="hi">Hindi</option>
+                                    <option value="gu">Gujarati</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timezone">Timezone</label>
+                                <select id="timezone">
+                                    <option value="UTC">UTC</option>
+                                    <option value="IST" selected>Indian Standard Time (IST)</option>
+                                    <option value="EST">Eastern Standard Time (EST)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save General Settings</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Business Settings -->
+                <div class="settings-section" id="business">
+                    <div class="settings-card">
+                        <h3>Business Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="kitchenName">Kitchen Name</label>
+                                <input type="text" id="kitchenName" value="Sharma's Kitchen" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cuisineType">Cuisine Type</label>
+                                <select id="cuisineType">
+                                    <option value="gujarati" selected>Gujarati</option>
+                                    <option value="punjabi">Punjabi</option>
+                                    <option value="south-indian">South Indian</option>
+                                    <option value="chinese">Chinese</option>
+                                    <option value="italian">Italian</option>
+                                    <option value="continental">Continental</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="mealType">Meal Type</label>
+                                <select id="mealType">
+                                    <option value="vegetarian" selected>Vegetarian</option>
+                                    <option value="non-vegetarian">Non-Vegetarian</option>
+                                    <option value="both">Both</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="serviceArea">Service Area</label>
+                                <input type="text" id="serviceArea" value="Ahmedabad, Gujarat" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="maxOrders">Maximum Daily Orders</label>
+                                <input type="number" id="maxOrders" value="20" min="1" max="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="prepTime">Average Preparation Time (minutes)</label>
+                                <input type="number" id="prepTime" value="45" min="15" max="180">
+                            </div>
+                            <div class="form-group">
+                                <label for="businessHours">Business Hours</label>
+                                <div class="business-hours">
+                                    <div class="hours-row">
+                                        <label>Monday - Friday:</label>
+                                        <input type="time" id="weekdayStart" value="08:00">
+                                        <span>to</span>
+                                        <input type="time" id="weekdayEnd" value="22:00">
+                                    </div>
+                                    <div class="hours-row">
+                                        <label>Saturday - Sunday:</label>
+                                        <input type="time" id="weekendStart" value="09:00">
+                                        <span>to</span>
+                                        <input type="time" id="weekendEnd" value="23:00">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Business Settings</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="settings-section" id="notifications">
+                    <div class="settings-card">
+                        <h3>Notification Preferences</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="orderNotifications">New Order Notifications</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="orderNotifications" checked>
+                                    <label for="orderNotifications" class="toggle-label"></label>
+                                </div>
+                                <small>Receive notifications when you get new orders</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailNotifications">Email Notifications</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="emailNotifications" checked>
+                                    <label for="emailNotifications" class="toggle-label"></label>
+                                </div>
+                                <small>Receive email updates about your orders and earnings</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="smsNotifications">SMS Notifications</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="smsNotifications">
+                                    <label for="smsNotifications" class="toggle-label"></label>
+                                </div>
+                                <small>Receive SMS alerts for urgent orders</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewNotifications">Customer Reviews</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="reviewNotifications" checked>
+                                    <label for="reviewNotifications" class="toggle-label"></label>
+                                </div>
+                                <small>Get notified when customers leave reviews</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentNotifications">Payment Notifications</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="paymentNotifications" checked>
+                                    <label for="paymentNotifications" class="toggle-label"></label>
+                                </div>
+                                <small>Receive notifications when payments are processed</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="marketingEmails">Marketing Emails</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="marketingEmails">
+                                    <label for="marketingEmails" class="toggle-label"></label>
+                                </div>
+                                <small>Receive promotional emails and offers from AkshayFeast</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Notification Settings</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Privacy Settings -->
+                <div class="settings-section" id="privacy">
+                    <div class="settings-card">
+                        <h3>Privacy Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="profileVisibility">Profile Visibility</label>
+                                <select id="profileVisibility">
+                                    <option value="public" selected>Public - Anyone can see my profile</option>
+                                    <option value="registered">Registered Users Only</option>
+                                    <option value="customers">Customers Only</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="showPhone">Show Phone Number</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="showPhone" checked>
+                                    <label for="showPhone" class="toggle-label"></label>
+                                </div>
+                                <small>Display your phone number to customers</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="showEmail">Show Email Address</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="showEmail">
+                                    <label for="showEmail" class="toggle-label"></label>
+                                </div>
+                                <small>Display your email address to customers</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="locationSharing">Location Sharing</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="locationSharing" checked>
+                                    <label for="locationSharing" class="toggle-label"></label>
+                                </div>
+                                <small>Share your service area location with customers</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="dataCollection">Data Collection</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="dataCollection" checked>
+                                    <label for="dataCollection" class="toggle-label"></label>
+                                </div>
+                                <small>Allow AkshayFeast to collect usage data for improving services</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Privacy Settings</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="settings-section" id="security">
+                    <div class="settings-card">
+                        <h3>Security Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" required>
+                                <div class="password-strength">
+                                    <div class="strength-bar"></div>
+                                    <span class="strength-text">Password Strength</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" id="confirmPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="twoFactorAuth">Two-Factor Authentication</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="twoFactorAuth">
+                                    <label for="twoFactorAuth" class="toggle-label"></label>
+                                </div>
+                                <small>Add an extra layer of security to your account</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginAlerts">Login Alerts</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="loginAlerts" checked>
+                                    <label for="loginAlerts" class="toggle-label"></label>
+                                </div>
+                                <small>Get notified when someone logs into your account</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Active Sessions</label>
+                                <div class="sessions-list">
+                                    <div class="session-item">
+                                        <div class="session-info">
+                                            <strong>Chrome on Windows</strong>
+                                            <small>Current session • Ahmedabad, India</small>
+                                        </div>
+                                        <span class="session-active">Active</span>
+                                    </div>
+                                    <div class="session-item">
+                                        <div class="session-info">
+                                            <strong>Mobile App</strong>
+                                            <small>2 hours ago • Ahmedabad, India</small>
+                                        </div>
+                                        <button type="button" class="btn btn-secondary btn-sm">Revoke</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Danger Zone</label>
+                                <div class="danger-actions">
+                                    <button type="button" class="btn btn-secondary">Download My Data</button>
+                                    <button type="button" class="btn btn-delete">Delete Account</button>
+                                </div>
+                                <small>Irreversible actions. Please be careful.</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Security Settings</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Cooks</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="menu.html">Manage Menu</a></li>
+                        <li><a href="orders.html">Orders</a></li>
+                        <li><a href="earnings.html">Earnings</a></li>
+                        <li><a href="#">Cook Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Cook logout function
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            // Remove any existing messages
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            // Insert at the top of page container
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Settings tab switching
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.settings-tab');
+            const sections = document.querySelectorAll('.settings-section');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // Remove active class from all tabs and sections
+                    tabs.forEach(t => t.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding section
+                    this.classList.add('active');
+                    document.getElementById(targetSection).classList.add('active');
+                });
+            });
+
+            // Handle form submissions
+            const forms = document.querySelectorAll('.settings-form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showMessage('Settings saved successfully!', 'success');
+                });
+            });
+
+            // Password strength checker
+            const newPasswordInput = document.getElementById('newPassword');
+            const strengthBar = document.querySelector('.strength-bar');
+            const strengthText = document.querySelector('.strength-text');
+
+            newPasswordInput.addEventListener('input', function() {
+                const password = this.value;
+                const strength = checkPasswordStrength(password);
+                updatePasswordStrength(strength);
+            });
+
+            function checkPasswordStrength(password) {
+                let strength = 0;
+                if (password.length >= 8) strength++;
+                if (password.match(/[a-z]+/)) strength++;
+                if (password.match(/[A-Z]+/)) strength++;
+                if (password.match(/[0-9]+/)) strength++;
+                if (password.match(/[$@#&!]+/)) strength++;
+                return strength;
+            }
+
+            function updatePasswordStrength(strength) {
+                const strengthLevels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+                const strengthColors = ['#dc3545', '#ffc107', '#fd7e14', '#20c997', '#28a745'];
+                
+                strengthBar.style.width = (strength * 20) + '%';
+                strengthBar.style.backgroundColor = strengthColors[strength - 1] || '#dc3545';
+                strengthText.textContent = strengthLevels[strength - 1] || 'Very Weak';
+            }
+        });
+    </script>
+
+    <style>
+        /* Settings Specific Styles */
+        .settings-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .settings-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 1rem;
+        }
+
+        .settings-tab {
+            padding: 0.75rem 1.5rem;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .settings-tab:hover {
+            background: #e9ecef;
+            color: #ff6b35;
+        }
+
+        .settings-tab.active {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .settings-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .settings-card h3 {
+            margin-bottom: 1.5rem;
+            color: #333;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #ff6b35;
+            padding-bottom: 0.5rem;
+        }
+
+        .settings-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2);
+        }
+
+        .form-group small {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-label {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        .toggle-label:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-label {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+        }
+
+        input:checked + .toggle-label:before {
+            transform: translateX(30px);
+        }
+
+        .business-hours {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hours-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hours-row label {
+            min-width: 150px;
+            font-weight: 500;
+        }
+
+        .hours-row input {
+            width: 120px;
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            margin-bottom: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .strength-text {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .sessions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .session-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e1e5e9;
+        }
+
+        .session-info strong {
+            display: block;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .session-info small {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .session-active {
+            color: #28a745;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .danger-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .settings-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .settings-tab {
+                flex: 1;
+                min-width: 100px;
+                text-align: center;
+            }
+            
+            .settings-card {
+                padding: 1.5rem;
+            }
+
+            .hours-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .hours-row label {
+                min-width: auto;
+            }
+
+            .session-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .danger-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</body>
+</html>
+
+

@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cook Dashboard - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Manage your homemade food business, track orders, and monitor earnings with AkshayFeast.">
+    <meta name="keywords" content="cook dashboard, homemade food, tiffin service, meal delivery, earnings">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="menu.html">Manage Menu</a>
+                <a href="orders.html">Orders</a>
+                <a href="earnings.html">Earnings</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Welcome back, <span id="cookWelcomeName">Mrs. Sharma</span>! 👋</h1>
+                    <p class="page-subtitle">Your homemade food business dashboard</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="window.location.href='menu.html'">
+                        <i class="fas fa-utensils"></i> Update Menu
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='orders.html'">
+                        <i class="fas fa-shopping-bag"></i> View Orders
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value">28</div>
+                    <div class="stat-label">Active Customers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-label">Meals This Month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <div class="stat-value">₹18,720</div>
+                    <div class="stat-label">Monthly Earnings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-value">4.8</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+            </div>
+
+        <!-- Today's Orders -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Today's Orders</h2>
+                    <a href="orders.html" class="btn btn-secondary">View All</a>
+                </div>
+                
+                <div class="orders-grid">
+                    <!-- Order Card 1 -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Order #ORD-2024-001</h4>
+                                <p class="order-date">Today • 12:30 PM</p>
+                            </div>
+                            <span class="order-status status-confirmed">Confirmed</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Akshay Kumar</h5>
+                            <p>Weekly Lunch • North Indian</p>
+                            <p><strong>Delivery:</strong> Koramangala, Block 4</p>
+                            <p><strong>Special:</strong> Less spicy, no onions</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="markDelivered('ORD-2024-001')">Mark Delivered</button>
+                            <button class="btn btn-secondary btn-sm" onclick="callCustomer('+91 98765 43210')">Call Customer</button>
+                        </div>
+                    </div>
+
+                    <!-- Order Card 2 -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Order #ORD-2024-002</h4>
+                                <p class="order-date">Today • 7:00 PM</p>
+                            </div>
+                            <span class="order-status status-pending">Pending</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Priya Sharma</h5>
+                            <p>Monthly Dinner • North Indian</p>
+                            <p><strong>Delivery:</strong> HSR Layout, Sector 2</p>
+                            <p><strong>Special:</strong> Extra roti please</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="acceptOrder('ORD-2024-002')">Accept Order</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectOrder('ORD-2024-002')">Reject</button>
+                        </div>
+                    </div>
+
+                    <!-- Order Card 3 -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Order #ORD-2024-003</h4>
+                                <p class="order-date">Today • 1:00 PM</p>
+                            </div>
+                            <span class="order-status status-confirmed">Confirmed</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Amit Patel</h5>
+                            <p>Daily Lunch • North Indian</p>
+                            <p><strong>Delivery:</strong> BTM Layout, 2nd Stage</p>
+                            <p><strong>Special:</strong> No special instructions</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="markDelivered('ORD-2024-003')">Mark Delivered</button>
+                            <button class="btn btn-secondary btn-sm" onclick="callCustomer('+91 98765 43212')">Call Customer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Subscription Requests -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Pending Subscription Requests</h2>
+                    <span class="badge badge-warning">3 New</span>
+                </div>
+                
+                <div class="orders-grid">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Subscription #SUB-2024-003</h4>
+                                <p class="order-date">Start: Feb 5, 2026</p>
+                            </div>
+                            <span class="order-status status-pending">Pending Approval</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Amit Patel</h5>
+                            <p>Daily Lunch (30 days) • North Indian</p>
+                            <p><strong>Total Amount:</strong> ₹3,600</p>
+                            <p><strong>Delivery:</strong> BTM Layout, 2nd Stage</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="acceptSubscription('SUB-2024-003')">Accept</button>
+                            <button class="btn btn-secondary btn-sm" onclick="messageCustomer('SUB-2024-003')">Message</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectSubscription('SUB-2024-003')">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Performance -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Weekly Performance</h2>
+                    <div class="performance-summary">
+                        <span class="performance-stat">42 meals delivered</span>
+                        <span class="performance-change">+15% from last week</span>
+                    </div>
+                </div>
+                
+                <div class="performance-chart">
+                    <div class="chart-container">
+                        <div class="chart-days-header">
+                            <div class="chart-day-label">Monday</div>
+                            <div class="chart-day-label">Tuesday</div>
+                            <div class="chart-day-label">Wednesday</div>
+                            <div class="chart-day-label">Thursday</div>
+                            <div class="chart-day-label">Friday</div>
+                            <div class="chart-day-label">Saturday</div>
+                            <div class="chart-day-label">Sunday</div>
+                        </div>
+                        <div class="chart-bars">
+                            <div class="chart-bar">
+                                <div class="bar-fill" style="height: 80%">
+                                    <span class="bar-value">8</span>
+                                </div>
+                                <span class="bar-label">Mon</span>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar-fill" style="height: 60%">
+                                    <span class="bar-value">6</span>
+                                </div>
+                                <span class="bar-label">Tue</span>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar-fill" style="height: 90%">
+                                    <span class="bar-value">9</span>
+                                </div>
+                                <span class="bar-label">Wed</span>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar-fill" style="height: 70%">
+                                    <span class="bar-value">7</span>
+                                </div>
+                                <span class="bar-label">Thu</span>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar-fill" style="height: 85%">
+                                    <span class="bar-value">8</span>
+                                </div>
+                                <span class="bar-label">Fri</span>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar-fill" style="height: 40%">
+                                    <span class="bar-value">4</span>
+                                </div>
+                                <span class="bar-label">Sat</span>
+                            </div>
+                            <div class="chart-bar">
+                                <div class="bar-fill" style="height: 80%">
+                                    <span class="bar-value">8</span>
+                                </div>
+                                <span class="bar-label">Sun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification Alert -->
+            <div class="notification notification-success">
+                <strong>🎉 Great job!</strong> You've received 5 new subscription requests this week! <a href="orders.html" class="notification-link">View All Orders</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Cooks</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="menu.html">Manage Menu</a></li>
+                        <li><a href="orders.html">Orders</a></li>
+                        <li><a href="earnings.html">Earnings</a></li>
+                        <li><a href="#">Cook Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/cook-dashboard.js"></script>
+</body>
+</html>
+
+

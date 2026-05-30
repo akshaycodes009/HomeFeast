@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnings - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Track your earnings, view payment history, and manage your finances with AkshayFeast.">
+    <meta name="keywords" content="cook earnings, payment history, tiffin service income, homemade food revenue">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/earnings-enhanced.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="menu.html">Manage Menu</a>
+                <a href="orders.html">Orders</a>
+                <a href="earnings.html">Earnings</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Earnings Overview 💰</h1>
+                    <p class="page-subtitle">Track your income and payment history</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="downloadStatement()">
+                        <i class="fas fa-download"></i> Download Statement
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='profile.html'">
+                        <i class="fas fa-credit-card"></i> Payment Settings
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-value">₹18,720</div>
+                    <div class="stat-label">This Month</div>
+                    <div class="stat-change positive">+12% from last month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-value">₹156,240</div>
+                    <div class="stat-label">This Year</div>
+                    <div class="stat-change positive">+8% growth</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-value">₹1,560</div>
+                    <div class="stat-label">Daily Average</div>
+                    <div class="stat-change positive">+5% increase</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="stat-value">₹456,000</div>
+                    <div class="stat-label">Total Earnings</div>
+                    <div class="stat-change positive">Since Jan 2023</div>
+                </div>
+            </div>
+
+        <!-- Monthly Earnings Trend -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Monthly Earnings Trend</h2>
+                    <div class="period-selector">
+                        <button class="btn btn-sm btn-secondary active">6 Months</button>
+                        <button class="btn btn-sm btn-secondary">1 Year</button>
+                        <button class="btn btn-sm btn-secondary">All Time</button>
+                    </div>
+                </div>
+                
+                <div class="earnings-chart">
+                    <div class="chart-bars">
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 70%">
+                                <span class="bar-label">Aug</span>
+                                <span class="bar-value">₹14K</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 85%">
+                                <span class="bar-label">Sep</span>
+                                <span class="bar-value">₹17K</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 90%">
+                                <span class="bar-label">Oct</span>
+                                <span class="bar-value">₹18K</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 80%">
+                                <span class="bar-label">Nov</span>
+                                <span class="bar-value">₹16K</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 95%">
+                                <span class="bar-label">Dec</span>
+                                <span class="bar-value">₹19K</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 88%">
+                                <span class="bar-label">Jan</span>
+                                <span class="bar-value">₹18.7K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- January 2026 Summary -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">January 2026 Summary</h2>
+                    <span class="badge badge-success">Best Month</span>
+                </div>
+                
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="summary-content">
+                            <h4>Total Revenue</h4>
+                            <div class="summary-value">₹18,720</div>
+                            <div class="summary-change change-positive">+12% from last month</div>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="summary-content">
+                            <h4>Platform Fee (10%)</h4>
+                            <div class="summary-value negative">-₹1,872</div>
+                            <div class="summary-change">Standard rate</div>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="summary-content">
+                            <h4>Net Earnings</h4>
+                            <div class="summary-value">₹16,848</div>
+                            <div class="summary-change change-positive">+11% from last month</div>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="summary-content">
+                            <h4>Meals Delivered</h4>
+                            <div class="summary-value">156</div>
+                            <div class="summary-change change-positive">+8 meals from last month</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Transactions</h2>
+                    <a href="#" class="btn btn-secondary">View All</a>
+                </div>
+                
+                <div class="transaction-list">
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-id">#TXN-2026-001</div>
+                            <div class="transaction-desc">Weekly subscription - Akshay Kumar</div>
+                            <div class="transaction-date">Jan 30, 2026 • 10:30 AM</div>
+                        </div>
+                        <div class="transaction-amount positive">+₹840</div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-id">#TXN-2026-002</div>
+                            <div class="transaction-desc">Monthly subscription - Priya Sharma</div>
+                            <div class="transaction-date">Jan 29, 2026 • 2:15 PM</div>
+                        </div>
+                        <div class="transaction-amount positive">+₹4,500</div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-id">#TXN-2026-003</div>
+                            <div class="transaction-desc">Daily subscription - Amit Patel</div>
+                            <div class="transaction-date">Jan 28, 2026 • 9:45 AM</div>
+                        </div>
+                        <div class="transaction-amount positive">+₹3,600</div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-id">#TXN-2026-004</div>
+                            <div class="transaction-desc">Platform fee deduction</div>
+                            <div class="transaction-date">Jan 27, 2026 • 11:00 PM</div>
+                        </div>
+                        <div class="transaction-amount negative">-₹894</div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-id">#TXN-2026-005</div>
+                            <div class="transaction-desc">Weekly subscription - Neha Gupta</div>
+                            <div class="transaction-date">Jan 26, 2026 • 1:20 PM</div>
+                        </div>
+                        <div class="transaction-amount positive">+₹1,260</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Information -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Payment Information</h2>
+                    <a href="profile.html" class="btn btn-secondary">Update Details</a>
+                </div>
+                
+                <div class="payment-cards-grid">
+                    <div class="payment-card">
+                        <div class="payment-header">
+                            <div class="payment-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="payment-info">
+                                <h4>Next Payout Date</h4>
+                                <div class="payout-date">February 5, 2026</div>
+                            </div>
+                        </div>
+                        <div class="payment-details">
+                            <div class="payment-detail">
+                                <span>Days until payout:</span>
+                                <strong>6 days</strong>
+                            </div>
+                            <div class="payment-detail">
+                                <span>Expected amount:</span>
+                                <strong>₹16,848</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-card">
+                        <div class="payment-header">
+                            <div class="payment-icon">
+                                <i class="fas fa-bank"></i>
+                            </div>
+                            <div class="payment-info">
+                                <h4>Bank Account</h4>
+                                <div class="bank-name">State Bank of India</div>
+                            </div>
+                        </div>
+                        <div class="payment-details">
+                            <div class="payment-detail">
+                                <span>Account Number:</span>
+                                <strong>****1234</strong>
+                            </div>
+                            <div class="payment-detail">
+                                <span>Payment Method:</span>
+                                <strong>Bank Transfer</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-card">
+                        <div class="payment-header">
+                            <div class="payment-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="payment-info">
+                                <h4>Current Balance</h4>
+                                <div class="balance-amount">₹16,848</div>
+                            </div>
+                        </div>
+                        <div class="payment-details">
+                            <div class="payment-detail">
+                                <span>Status:</span>
+                                <strong class="status-available">Available</strong>
+                            </div>
+                            <div class="payment-detail">
+                                <span>Last withdrawal:</span>
+                                <strong>Jan 1, 2026</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Cooks</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="menu.html">Manage Menu</a></li>
+                        <li><a href="orders.html">Orders</a></li>
+                        <li><a href="earnings.html">Earnings</a></li>
+                        <li><a href="#">Cook Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Earnings functionality
+        function downloadStatement() {
+            if (confirm('Download earnings statement for January 2026?')) {
+                console.log('Downloading earnings statement...');
+                showMessage('Earnings statement downloaded successfully!', 'success');
+                // Implement download logic
+            }
+        }
+
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            // Remove any existing messages
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            // Insert at the top of page container
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Period selector functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const periodButtons = document.querySelectorAll('.period-selector button');
+            
+            periodButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    periodButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Update chart data based on selected period
+                    const period = this.textContent;
+                    console.log('Selected period:', period);
+                    showMessage(`Showing earnings for ${period}`, 'info');
+                });
+            });
+
+            // Add navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+

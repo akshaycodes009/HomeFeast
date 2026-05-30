@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Manage the AkshayFeast platform, monitor users, cooks, orders, and track platform performance.">
+    <meta name="keywords" content="admin dashboard, platform management, homemade food, tiffin service">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/admin-enhanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast Admin</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="users.html">Users</a>
+                <a href="cooks.html">Cooks</a>
+                <a href="orders.html">Orders</a>
+                <a href="complaints.html">Complaints</a>
+                <a href="reports.html">Reports</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutAdmin()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Welcome back, <span id="adminWelcomeName">Admin</span>! 👋</h1>
+                    <p class="page-subtitle">Platform management dashboard</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="window.location.href='reports.html'">
+                        <i class="fas fa-chart-line"></i> Generate Reports
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='cooks.html'">
+                        <i class="fas fa-user-check"></i> Pending Approvals
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value">1,248</div>
+                    <div class="stat-label">Total Users</div>
+                    <div class="stat-change positive">+12% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👨‍🍳</div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-label">Active Cooks</div>
+                    <div class="stat-change positive">+8% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-value">3,456</div>
+                    <div class="stat-label">Total Orders</div>
+                    <div class="stat-change positive">+23% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-value">₹4,12,560</div>
+                    <div class="stat-label">Total Revenue</div>
+                    <div class="stat-change positive">+18% this month</div>
+                </div>
+            </div>
+
+            <!-- Pending Cook Approvals -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Pending Cook Approvals</h2>
+                    <span class="badge badge-warning">5 New</span>
+                </div>
+                
+                <div class="orders-grid">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Anjali's Kitchen</h4>
+                                <p class="order-date">Applied 2 hours ago</p>
+                            </div>
+                            <span class="order-status status-pending">Pending Approval</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>anjali.kitchen@email.com • +91 98765 43210</h5>
+                            <p>Gujarati • Vegetarian • ₹110/day</p>
+                            <p><strong>Service Area:</strong> Jayanagar, JP Nagar</p>
+                            <p><strong>Experience:</strong> 3 years</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="approveCook('CK001')">Approve</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewCookDetails('CK001')">View Details</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectCook('CK001')">Reject</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Rajasthan Food Services</h4>
+                                <p class="order-date">Applied 5 hours ago</p>
+                            </div>
+                            <span class="order-status status-pending">Pending Approval</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>rajasthan.food@email.com • +91 98765 43211</h5>
+                            <p>Rajasthani • Vegetarian • ₹130/day</p>
+                            <p><strong>Service Area:</strong> Whitefield, Marathahalli</p>
+                            <p><strong>Experience:</strong> 5 years</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="approveCook('CK002')">Approve</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewCookDetails('CK002')">View Details</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectCook('CK002')">Reject</button>
+                        </div>
+                    </div>
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Punjab Dhaba</h4>
+                                <p class="order-date">Applied 8 hours ago</p>
+                            </div>
+                            <span class="order-status status-pending">Pending Approval</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>punjab.dhaba@email.com • +91 98765 43212</h5>
+                            <p>Punjabi • Non-Vegetarian • ₹150/day</p>
+                            <p><strong>Service Area:</strong> Indiranagar, Koramangala</p>
+                            <p><strong>Experience:</strong> 7 years</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="approveCook('CK003')">Approve</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewCookDetails('CK003')">View Details</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectCook('CK003')">Reject</button>
+                        </div>
+                    </div>
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Homely Meals</h4>
+                                <p class="order-date">Applied 12 hours ago</p>
+                            </div>
+                            <span class="order-status status-pending">Pending Approval</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>homely.meals@email.com • +91 98765 43213</h5>
+                            <p>South Indian • Vegetarian • ₹120/day</p>
+                            <p><strong>Service Area:</strong> HSR Layout, BTM Layout</p>
+                            <p><strong>Experience:</strong> 4 years</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="approveCook('CK004')">Approve</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewCookDetails('CK004')">View Details</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectCook('CK004')">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Analytics -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Platform Analytics</h2>
+                    <div class="performance-summary">
+                        <span class="performance-stat">Healthy growth</span>
+                        <span class="performance-change">+15% overall performance</span>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-title">Daily Active Users</div>
+                        <div class="report-value">342</div>
+                        <div class="report-subtitle">Last 24 hours</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">New Registrations</div>
+                        <div class="report-value">28</div>
+                        <div class="report-subtitle">Today</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Average Order Value</div>
+                        <div class="report-value">₹120</div>
+                        <div class="report-subtitle">Per transaction</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Platform Rating</div>
+                        <div class="report-value">4.7</div>
+                        <div class="report-subtitle">Average user rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Platform Activity</h2>
+                </div>
+                
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon">�</div>
+                        <div class="activity-details">
+                            <div class="activity-title">New User Registration</div>
+                            <div class="activity-desc">Priya Sharma registered on the platform</div>
+                            <div class="activity-time">2 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">�‍🍳</div>
+                        <div class="activity-details">
+                            <div class="activity-title">New Cook Application</div>
+                            <div class="activity-desc">Anjali's Kitchen submitted cook application</div>
+                            <div class="activity-time">5 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">📦</div>
+                        <div class="activity-details">
+                            <div class="activity-title">Order Placed</div>
+                            <div class="activity-desc">Akshay Kumar placed order for lunch tiffin</div>
+                            <div class="activity-time">15 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">⭐</div>
+                        <div class="activity-details">
+                            <div class="activity-title">New Review Posted</div>
+                            <div class="activity-desc">5-star rating for Mom's Recipes</div>
+                            <div class="activity-time">6 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">�</div>
+                        <div class="activity-details">
+                            <div class="activity-title">Payment Processed</div>
+                            <div class="activity-desc">Monthly payouts completed</div>
+                            <div class="activity-time">8 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+                    </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast Admin</h3>
+                    </div>
+                    <p>Managing homemade food delivery platform efficiently</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Admin Functions</h4>
+                    <ul>
+                        <li><a href="users.html">User Management</a></li>
+                        <li><a href="cooks.html">Cook Management</a></li>
+                        <li><a href="orders.html">Order Monitoring</a></li>
+                        <li><a href="reports.html">Analytics</a></li>
+                        <li><a href="#">Admin Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> admin@AkshayFeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> 24/7 Support</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Admin Dashboard functionality
+        function approveCook(cookId) {
+            if (confirm('Approve this cook application?')) {
+                console.log('Approving cook:', cookId);
+                showMessage('Cook approved successfully!', 'success');
+            }
+        }
+
+        function rejectCook(cookId) {
+            if (confirm('Reject this cook application? This action cannot be undone.')) {
+                console.log('Rejecting cook:', cookId);
+                showMessage('Cook application rejected', 'error');
+            }
+        }
+
+        function viewCookDetails(cookId) {
+            console.log('Viewing cook details:', cookId);
+            // Implement view details logic
+        }
+
+        function logoutAdmin() {
+            if (confirm('Are you sure you want to logout from admin panel?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            // Remove any existing messages
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage && !existingMessage.classList.contains('notification-info')) {
+                existingMessage.remove();
+            }
+            
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            // Insert at the top of page container
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Load admin data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            if (!currentUser) return;
+
+            const nameEl = document.getElementById('adminWelcomeName');
+            if (nameEl) {
+                nameEl.textContent = currentUser.name || 'Admin';
+            }
+        });
+    </script>
+</body>
+</html>
+
+

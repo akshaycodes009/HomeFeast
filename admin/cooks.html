@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Cooks - AkshayFeast Admin | Homemade Tiffin Service</title>
+    <meta name="description" content="Approve and manage home cook applications, monitor performance, and handle cook accounts on AkshayFeast platform.">
+    <meta name="keywords" content="admin cooks, cook management, homemade food, tiffin service, cook approval">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/admin-enhanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="cook-management-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast Admin</h2>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="users.html">Users</a>
+                <a href="cooks.html" class="active">Cooks</a>
+                <a href="orders.html">Orders</a>
+                <a href="complaints.html">Complaints</a>
+                <a href="reports.html">Reports</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutAdmin()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Manage Cooks 👨‍🍳</h1>
+                    <p class="page-subtitle">Approve applications and manage home cook partners</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="exportCookData()">
+                        <i class="fas fa-download"></i> Export Data
+                    </button>
+                    <button class="btn btn-secondary" onclick="showAddCookForm()">
+                        <i class="fas fa-plus"></i> Add Cook
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👨‍🍳</div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-label">Total Cooks</div>
+                    <div class="stat-change positive">+8% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value">142</div>
+                    <div class="stat-label">Active Cooks</div>
+                    <div class="stat-change positive">+6% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Pending Approval</div>
+                    <div class="stat-change negative">Need attention</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value">4.6</div>
+                    <div class="stat-label">Average Rating</div>
+                    <div class="stat-change positive">+0.2 this month</div>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Search & Filters</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="resetFilters()">Reset All</button>
+                </div>
+                
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="cookSearch">Search Cooks</label>
+                        <input type="text" id="cookSearch" placeholder="Enter name, email, or ID...">
+                    </div>
+                    <div class="form-group">
+                        <label for="approvalStatus">Approval Status</label>
+                        <select id="approvalStatus">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                            <option value="suspended">Suspended</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cuisineFilter">Cuisine Type</label>
+                        <select id="cuisineFilter">
+                            <option value="">All Cuisines</option>
+                            <option value="north-indian">North Indian</option>
+                            <option value="south-indian">South Indian</option>
+                            <option value="maharashtrian">Maharashtrian</option>
+                            <option value="punjabi">Punjabi</option>
+                            <option value="gujarati">Gujarati</option>
+                            <option value="rajasthani">Rajasthani</option>
+                            <option value="continental">Continental</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ratingFilter">Minimum Rating</label>
+                        <select id="ratingFilter">
+                            <option value="">All Ratings</option>
+                            <option value="4.5">4.5+ Stars</option>
+                            <option value="4.0">4.0+ Stars</option>
+                            <option value="3.5">3.5+ Stars</option>
+                            <option value="3.0">3.0+ Stars</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+                </div>
+            </div>
+
+            <!-- Pending Approvals -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Pending Approvals</h2>
+                    <span class="badge badge-warning">8 New Applications</span>
+                </div>
+                
+                <div class="orders-grid">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Anjali's Kitchen</h4>
+                                <p class="order-date">Applied 2 hours ago</p>
+                            </div>
+                            <span class="order-status status-pending">Pending Approval</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>anjali.kitchen@email.com • +91 98765 43210</h5>
+                            <p>Gujarati • Vegetarian • ₹110/day</p>
+                            <p><strong>Service Area:</strong> Jayanagar, JP Nagar</p>
+                            <p><strong>Experience:</strong> 3 years • <strong>Rating:</strong> Not rated yet</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="approveCook('CK001')">Approve</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewCookDetails('CK001')">View Details</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectCook('CK001')">Reject</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Rajasthan Food Corner</h4>
+                                <p class="order-date">Applied 5 hours ago</p>
+                            </div>
+                            <span class="order-status status-pending">Pending Approval</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>rajasthan.food@email.com • +91 98765 43211</h5>
+                            <p>Rajasthani • Vegetarian • ₹130/day</p>
+                            <p><strong>Service Area:</strong> Whitefield, Marathahalli</p>
+                            <p><strong>Experience:</strong> 5 years • <strong>Rating:</strong> Not rated yet</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="approveCook('CK002')">Approve</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewCookDetails('CK002')">View Details</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectCook('CK002')">Reject</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Punjab Da Dhaba</h4>
+                                <p class="order-date">Applied 1 day ago</p>
+                            </div>
+                            <span class="order-status status-pending">Pending Approval</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>punjab.dhaba@email.com • +91 98765 43212</h5>
+                            <p>Punjabi • Both • ₹150/day</p>
+                            <p><strong>Service Area:</strong> Koramangala, Indiranagar</p>
+                            <p><strong>Experience:</strong> 7 years • <strong>Rating:</strong> Not rated yet</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="approveCook('CK003')">Approve</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewCookDetails('CK003')">View Details</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectCook('CK003')">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Cooks Table -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Active Cooks</h2>
+                    <div class="performance-summary">
+                        <span class="performance-stat">142 cooks</span>
+                        <span class="performance-change">+6% this month</span>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Cook ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Cuisine</th>
+                                <th>Rating</th>
+                                <th>Orders</th>
+                                <th>Revenue</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#CK-001</strong></td>
+                                <td>Sharma's Kitchen</td>
+                                <td>sharma.kitchen@email.com</td>
+                                <td>North Indian</td>
+                                <td>⭐ 4.8 (124)</td>
+                                <td>156</td>
+                                <td>₹18,720</td>
+                                <td><span class="order-status status-confirmed">Active</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewCookProfile('CK-001')">View</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="editCook('CK-001')">Edit</button>
+                                        <button class="btn btn-danger btn-sm" onclick="suspendCook('CK-001')">Suspend</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#CK-002</strong></td>
+                                <td>Mom's Recipes</td>
+                                <td>moms.recipes@email.com</td>
+                                <td>South Indian</td>
+                                <td>⭐ 4.9 (89)</td>
+                                <td>89</td>
+                                <td>₹13,350</td>
+                                <td><span class="order-status status-confirmed">Active</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewCookProfile('CK-002')">View</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="editCook('CK-002')">Edit</button>
+                                        <button class="btn btn-danger btn-sm" onclick="suspendCook('CK-002')">Suspend</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#CK-003</strong></td>
+                                <td>Homely Meals</td>
+                                <td>homely.meals@email.com</td>
+                                <td>Maharashtrian</td>
+                                <td>⭐ 4.7 (156)</td>
+                                <td>124</td>
+                                <td>₹12,400</td>
+                                <td><span class="order-status status-confirmed">Active</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewCookProfile('CK-003')">View</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="editCook('CK-003')">Edit</button>
+                                        <button class="btn btn-danger btn-sm" onclick="suspendCook('CK-003')">Suspend</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#CK-004</strong></td>
+                                <td>Punjabi Dhaba</td>
+                                <td>punjabi.dhaba@email.com</td>
+                                <td>Punjabi</td>
+                                <td>⭐ 4.9 (67)</td>
+                                <td>67</td>
+                                <td>₹10,050</td>
+                                <td><span class="order-status status-confirmed">Active</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewCookProfile('CK-004')">View</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="editCook('CK-004')">Edit</button>
+                                        <button class="btn btn-danger btn-sm" onclick="suspendCook('CK-004')">Suspend</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#CK-005</strong></td>
+                                <td>Healthy Bites</td>
+                                <td>healthy.bites@email.com</td>
+                                <td>Continental</td>
+                                <td>⭐ 4.7 (92)</td>
+                                <td>92</td>
+                                <td>₹13,800</td>
+                                <td><span class="order-status status-pending">Suspended</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewCookProfile('CK-005')">View</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="editCook('CK-005')">Edit</button>
+                                        <button class="btn btn-success btn-sm" onclick="reactivateCook('CK-005')">Reactivate</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="btn btn-secondary" onclick="previousPage()">Previous</button>
+                <span>Page 1 of 32</span>
+                <button class="btn btn-secondary" onclick="nextPage()">Next</button>
+            </div>
+
+                    </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast Admin</h3>
+                    </div>
+                    <p>Managing homemade food delivery platform efficiently</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="users.html">User Management</a></li>
+                        <li><a href="orders.html">Order Monitoring</a></li>
+                        <li><a href="reports.html">Analytics</a></li>
+                        <li><a href="#">Admin Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Cook Management</h4>
+                    <ul>
+                        <li><a href="#pending">Pending Approvals</a></li>
+                        <li><a href="#active">Active Cooks</a></li>
+                        <li><a href="#">Cook Guidelines</a></li>
+                        <li><a href="#">Performance Metrics</a></li>
+                        <li><a href="#">Cook Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> admin@AkshayFeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> 24/7 Support</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Admin Cooks functionality
+        function approveCook(cookId) {
+            if (confirm('Approve this cook application?')) {
+                console.log('Approving cook:', cookId);
+                showMessage('Cook approved successfully!', 'success');
+            }
+        }
+
+        function rejectCook(cookId) {
+            if (confirm('Reject this cook application? This action cannot be undone.')) {
+                console.log('Rejecting cook:', cookId);
+                showMessage('Cook application rejected', 'error');
+            }
+        }
+
+        function viewCookDetails(cookId) {
+            console.log('Viewing cook details:', cookId);
+            showMessage('Opening cook details...', 'info');
+        }
+
+        function viewCookProfile(cookId) {
+            console.log('Viewing cook profile:', cookId);
+            showMessage('Opening cook profile...', 'info');
+        }
+
+        function editCook(cookId) {
+            console.log('Editing cook:', cookId);
+            showMessage('Opening edit form...', 'info');
+        }
+
+        function suspendCook(cookId) {
+            if (confirm('Suspend this cook? They will not be able to receive new orders.')) {
+                console.log('Suspending cook:', cookId);
+                showMessage('Cook suspended successfully', 'warning');
+            }
+        }
+
+        function reactivateCook(cookId) {
+            if (confirm('Reactivate this cook? They will start receiving orders again.')) {
+                console.log('Reactivating cook:', cookId);
+                showMessage('Cook reactivated successfully', 'success');
+            }
+        }
+
+        function applyFilters() {
+            console.log('Applying filters...');
+            showMessage('Filters applied successfully', 'success');
+        }
+
+        function resetFilters() {
+            document.getElementById('cookSearch').value = '';
+            document.getElementById('approvalStatus').value = '';
+            document.getElementById('cuisineFilter').value = '';
+            document.getElementById('ratingFilter').value = '';
+            showMessage('Filters reset successfully', 'info');
+        }
+
+        function exportCookData() {
+            console.log('Exporting cook data...');
+            showMessage('Exporting data to Excel...', 'info');
+        }
+
+        function showAddCookForm() {
+            console.log('Opening add cook form...');
+            showMessage('Add cook form coming soon!', 'info');
+        }
+
+        function scrollToPending() {
+            document.querySelector('#pending').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function previousPage() {
+            console.log('Going to previous page...');
+        }
+
+        function nextPage() {
+            console.log('Going to next page...');
+        }
+
+        function logoutAdmin() {
+            if (confirm('Are you sure you want to logout from admin panel?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage && !existingMessage.classList.contains('notification-info')) {
+                existingMessage.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
+
+

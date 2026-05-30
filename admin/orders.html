@@ -1,0 +1,555 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor Orders - AkshayFeast Admin | Homemade Tiffin Service</title>
+    <meta name="description" content="Monitor all platform orders, track transactions, and manage order fulfillment on AkshayFeast platform.">
+    <meta name="keywords" content="admin orders, order monitoring, transaction tracking, homemade food, tiffin service">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/admin-enhanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="order-management-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast Admin</h2>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="users.html">Users</a>
+                <a href="cooks.html">Cooks</a>
+                <a href="orders.html" class="active">Orders</a>
+                <a href="complaints.html">Complaints</a>
+                <a href="reports.html">Reports</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutAdmin()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Monitor Orders 📦</h1>
+                    <p class="page-subtitle">Track all platform orders and transactions</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="exportOrderData()">
+                        <i class="fas fa-download"></i> Export Orders
+                    </button>
+                    <button class="btn btn-secondary" onclick="generateOrderReport()">
+                        <i class="fas fa-chart-bar"></i> Order Report
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-value">3,456</div>
+                    <div class="stat-label">Total Orders</div>
+                    <div class="stat-change positive">+15% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🍽️</div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-label">Orders Today</div>
+                    <div class="stat-change positive">+8% from yesterday</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-value">₹4,56,789</div>
+                    <div class="stat-label">Monthly Revenue</div>
+                    <div class="stat-change positive">+18% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-value">32 min</div>
+                    <div class="stat-label">Avg Delivery Time</div>
+                    <div class="stat-change positive">-5 min improvement</div>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Search & Filters</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="resetFilters()">Reset All</button>
+                </div>
+                
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="orderSearch">Search Orders</label>
+                        <input type="text" id="orderSearch" placeholder="Enter order ID, user email, or cook name...">
+                    </div>
+                    <div class="form-group">
+                        <label for="statusFilter">Order Status</label>
+                        <select id="statusFilter">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="preparing">Preparing</option>
+                            <option value="ready">Ready</option>
+                            <option value="delivering">Delivering</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentFilter">Payment Status</label>
+                        <select id="paymentFilter">
+                            <option value="">All Payment Status</option>
+                            <option value="paid">Paid</option>
+                            <option value="pending">Pending</option>
+                            <option value="failed">Failed</option>
+                            <option value="refunded">Refunded</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateFilter">Date Range</label>
+                        <select id="dateFilter">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="yesterday">Yesterday</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+                </div>
+            </div>
+
+            <!-- Live Orders -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Live Orders</h2>
+                    <span class="badge badge-success">24 Active</span>
+                </div>
+                
+                <div class="orders-grid">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Order #ORD-2024-156</h4>
+                                <p class="order-date">Placed 15 min ago</p>
+                            </div>
+                            <span class="order-status status-confirmed">Confirmed</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Akshay Kumar • Sharma's Kitchen</h5>
+                            <p>North Indian • Lunch & Dinner • ₹120</p>
+                            <p><strong>Delivery:</strong> Koramangala, Block 4 • <strong>Payment:</strong> Paid</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="trackOrder('ORD-2024-156')">Track</button>
+                            <button class="btn btn-secondary btn-sm" onclick="contactUser('ORD-2024-156')">Contact User</button>
+                            <button class="btn btn-info btn-sm" onclick="viewDetails('ORD-2024-156')">Details</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Order #ORD-2024-157</h4>
+                                <p class="order-date">Placed 30 min ago</p>
+                            </div>
+                            <span class="order-status status-pending">Preparing</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Priya Sharma • Mom's Recipes</h5>
+                            <p>South Indian • Lunch Only • ₹100</p>
+                            <p><strong>Delivery:</strong> Indiranagar • <strong>Payment:</strong> Paid</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="trackOrder('ORD-2024-157')">Track</button>
+                            <button class="btn btn-secondary btn-sm" onclick="contactUser('ORD-2024-157')">Contact User</button>
+                            <button class="btn btn-info btn-sm" onclick="viewDetails('ORD-2024-157')">Details</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Order #ORD-2024-158</h4>
+                                <p class="order-date">Placed 45 min ago</p>
+                            </div>
+                            <span class="order-status status-delivered">Delivered</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Amit Patel • Homely Meals</h5>
+                            <p>Maharashtrian • Dinner Only • ₹80</p>
+                            <p><strong>Delivery:</strong> Jayanagar • <strong>Payment:</strong> Paid</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="rateOrder('ORD-2024-158')">Rate</button>
+                            <button class="btn btn-secondary btn-sm" onclick="reorder('ORD-2024-158')">Reorder</button>
+                            <button class="btn btn-info btn-sm" onclick="viewDetails('ORD-2024-158')">Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Orders Table -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">All Orders</h2>
+                    <div class="performance-summary">
+                        <span class="performance-stat">156 today</span>
+                        <span class="performance-change">+8% from yesterday</span>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Cook</th>
+                                <th>Items</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Payment</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#ORD-2024-156</strong></td>
+                                <td>Akshay Kumar</td>
+                                <td>Sharma's Kitchen</td>
+                                <td>Lunch & Dinner</td>
+                                <td>₹120</td>
+                                <td><span class="order-status status-confirmed">Confirmed</span></td>
+                                <td><span class="badge badge-success">Paid</span></td>
+                                <td>Jan 30, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewDetails('ORD-2024-156')">View</button>
+                                        <button class="btn btn-info btn-sm" onclick="trackOrder('ORD-2024-156')">Track</button>
+                                        <button class="btn btn-warning btn-sm" onclick="cancelOrder('ORD-2024-156')">Cancel</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-2024-157</strong></td>
+                                <td>Priya Sharma</td>
+                                <td>Mom's Recipes</td>
+                                <td>Lunch Only</td>
+                                <td>₹100</td>
+                                <td><span class="order-status status-pending">Preparing</span></td>
+                                <td><span class="badge badge-success">Paid</span></td>
+                                <td>Jan 30, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewDetails('ORD-2024-157')">View</button>
+                                        <button class="btn btn-info btn-sm" onclick="trackOrder('ORD-2024-157')">Track</button>
+                                        <button class="btn btn-warning btn-sm" onclick="cancelOrder('ORD-2024-157')">Cancel</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-2024-158</strong></td>
+                                <td>Amit Patel</td>
+                                <td>Homely Meals</td>
+                                <td>Dinner Only</td>
+                                <td>₹80</td>
+                                <td><span class="order-status status-delivered">Delivered</span></td>
+                                <td><span class="badge badge-success">Paid</span></td>
+                                <td>Jan 30, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewDetails('ORD-2024-158')">View</button>
+                                        <button class="btn btn-success btn-sm" onclick="rateOrder('ORD-2024-158')">Rate</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="reorder('ORD-2024-158')">Reorder</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-2024-155</strong></td>
+                                <td>Neha Singh</td>
+                                <td>Punjabi Dhaba</td>
+                                <td>Weekly Special</td>
+                                <td>₹150</td>
+                                <td><span class="order-status status-cancelled">Cancelled</span></td>
+                                <td><span class="badge badge-warning">Refunded</span></td>
+                                <td>Jan 29, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewDetails('ORD-2024-155')">View</button>
+                                        <button class="btn btn-info btn-sm" onclick="viewReason('ORD-2024-155')">Reason</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="contactSupport('ORD-2024-155')">Support</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#ORD-2024-154</strong></td>
+                                <td>Rohit Gupta</td>
+                                <td>Healthy Bites</td>
+                                <td>Monthly Plan</td>
+                                <td>₹3,000</td>
+                                <td><span class="order-status status-confirmed">Active</span></td>
+                                <td><span class="badge badge-success">Paid</span></td>
+                                <td>Jan 28, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewDetails('ORD-2024-154')">View</button>
+                                        <button class="btn btn-info btn-sm" onclick="viewSubscription('ORD-2024-154')">Subscription</button>
+                                        <button class="btn btn-warning btn-sm" onclick="pauseSubscription('ORD-2024-154')">Pause</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Order Analytics -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Order Analytics</h2>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-title">Daily Orders</div>
+                        <div class="report-value">156</div>
+                        <div class="report-subtitle">+8% from yesterday</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Avg Order Value</div>
+                        <div class="report-value">₹125</div>
+                        <div class="report-subtitle">+5% this week</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Delivery Success</div>
+                        <div class="report-value">96.8%</div>
+                        <div class="report-subtitle">On-time rate</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Customer Rating</div>
+                        <div class="report-value">4.6/5</div>
+                        <div class="report-subtitle">Average rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="btn btn-secondary" onclick="previousPage()">Previous</button>
+                <span>Page 1 of 68</span>
+                <button class="btn btn-secondary" onclick="nextPage()">Next</button>
+            </div>
+
+                    </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast Admin</h3>
+                    </div>
+                    <p>Managing homemade food delivery platform efficiently</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="users.html">User Management</a></li>
+                        <li><a href="cooks.html">Cook Management</a></li>
+                        <li><a href="complaints.html">Complaints</a></li>
+                        <li><a href="#">Admin Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Order Management</h4>
+                    <ul>
+                        <li><a href="#live-orders">Live Orders</a></li>
+                        <li><a href="#all-orders">All Orders</a></li>
+                        <li><a href="#">Order Analytics</a></li>
+                        <li><a href="#">Delivery Tracking</a></li>
+                        <li><a href="#">Payment Processing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> admin@AkshayFeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> 24/7 Support</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Admin Orders functionality
+        function trackOrder(orderId) {
+            console.log('Tracking order:', orderId);
+            showMessage('Opening order tracking...', 'info');
+        }
+
+        function viewDetails(orderId) {
+            console.log('Viewing order details:', orderId);
+            showMessage('Opening order details...', 'info');
+        }
+
+        function contactUser(orderId) {
+            console.log('Contacting user for order:', orderId);
+            showMessage('Opening user contact form...', 'info');
+        }
+
+        function rateOrder(orderId) {
+            console.log('Rating order:', orderId);
+            showMessage('Opening rating form...', 'info');
+        }
+
+        function reorder(orderId) {
+            if (confirm('Create reorder based on this order?')) {
+                console.log('Creating reorder for:', orderId);
+                showMessage('Reorder created successfully', 'success');
+            }
+        }
+
+        function cancelOrder(orderId) {
+            if (confirm('Cancel this order? This action cannot be undone.')) {
+                console.log('Cancelling order:', orderId);
+                showMessage('Order cancelled successfully', 'warning');
+            }
+        }
+
+        function viewReason(orderId) {
+            console.log('Viewing cancellation reason:', orderId);
+            showMessage('Opening cancellation details...', 'info');
+        }
+
+        function contactSupport(orderId) {
+            console.log('Contacting support for order:', orderId);
+            showMessage('Opening support ticket...', 'info');
+        }
+
+        function viewSubscription(orderId) {
+            console.log('Viewing subscription details:', orderId);
+            showMessage('Opening subscription details...', 'info');
+        }
+
+        function pauseSubscription(orderId) {
+            if (confirm('Pause this subscription?')) {
+                console.log('Pausing subscription:', orderId);
+                showMessage('Subscription paused successfully', 'warning');
+            }
+        }
+
+        function applyFilters() {
+            console.log('Applying filters...');
+            showMessage('Filters applied successfully', 'success');
+        }
+
+        function resetFilters() {
+            document.getElementById('orderSearch').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('paymentFilter').value = '';
+            document.getElementById('dateFilter').value = '';
+            showMessage('Filters reset successfully', 'info');
+        }
+
+        function exportOrderData() {
+            console.log('Exporting order data...');
+            showMessage('Exporting order data to Excel...', 'info');
+        }
+
+        function generateOrderReport() {
+            console.log('Generating order report...');
+            showMessage('Generating comprehensive order report...', 'info');
+        }
+
+        function previousPage() {
+            console.log('Going to previous page...');
+        }
+
+        function nextPage() {
+            console.log('Going to next page...');
+        }
+
+        function logoutAdmin() {
+            if (confirm('Are you sure you want to logout from admin panel?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage && !existingMessage.classList.contains('notification-success')) {
+                existingMessage.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
+            
+
+

@@ -1,0 +1,539 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Management - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Manage your homemade food orders, track deliveries, and handle customer requests with AkshayFeast.">
+    <meta name="keywords" content="cook orders, order management, tiffin service delivery, homemade food orders">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/orders-enhanced.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="menu.html">Manage Menu</a>
+                <a href="orders.html">Orders</a>
+                <a href="earnings.html">Earnings</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Orders Management 📦</h1>
+                    <p class="page-subtitle">Track and manage your customer orders</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="exportOrders()">
+                        <i class="fas fa-download"></i> Export Orders
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='dashboard.html'">
+                        <i class="fas fa-chart-line"></i> View Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- Orders Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Today's Orders</div>
+                    <div class="stat-change positive">2 pending</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Pending Requests</div>
+                    <div class="stat-change warning">Action needed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-week"></i>
+                    </div>
+                    <div class="stat-value">42</div>
+                    <div class="stat-label">This Week</div>
+                    <div class="stat-change positive">+15% from last week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-list-alt"></i>
+                    </div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-label">Total Orders</div>
+                    <div class="stat-change positive">Since Jan 2023</div>
+                </div>
+            </div>
+
+        <!-- Order Filters -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Order Filters</h2>
+                    <button class="btn btn-secondary" onclick="resetFilters()">Reset Filters</button>
+                </div>
+                
+                <div class="filter-section">
+                    <div class="filter-grid">
+                        <div class="form-group">
+                            <label for="statusFilter">Status</label>
+                            <select id="statusFilter" onchange="applyFilters()">
+                                <option value="">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateFilter">Date</label>
+                            <input type="date" id="dateFilter" onchange="applyFilters()">
+                        </div>
+                        <div class="form-group">
+                            <label for="searchCustomer">Search Customer</label>
+                            <input type="text" id="searchCustomer" placeholder="Enter customer name..." onkeyup="applyFilters()">
+                        </div>
+                        <div class="filter-actions">
+                            <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Today's Orders -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Today's Orders - January 30, 2026</h2>
+                    <div class="order-summary">
+                        <span class="summary-item">8 orders</span>
+                        <span class="summary-item">2 pending</span>
+                        <span class="summary-item">6 confirmed</span>
+                    </div>
+                </div>
+                
+                <div class="orders-grid">
+                    <!-- Order Card 1 -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Order #ORD-2026-001</h4>
+                                <p class="order-date">12:30 PM Delivery</p>
+                            </div>
+                            <span class="order-status status-confirmed">Confirmed</span>
+                        </div>
+                        <div class="order-details">
+                            <div class="customer-info">
+                                <h5>Akshay Kumar</h5>
+                                <p><strong>Phone:</strong> +91 98765 43210</p>
+                                <p><strong>Plan:</strong> Weekly Lunch</p>
+                                <p><strong>Address:</strong> Koramangala, Block 4, Apt 201, Bangalore - 560034</p>
+                                <p><strong>Special:</strong> Less spicy, no onions in salad</p>
+                            </div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="markDelivered('ORD-2026-001')">Mark Delivered</button>
+                            <button class="btn btn-secondary btn-sm" onclick="callCustomer('+91 98765 43210')">Call Customer</button>
+                            <button class="btn btn-info btn-sm" onclick="viewOrderDetails('ORD-2026-001')">View Details</button>
+                        </div>
+                    </div>
+
+                    <!-- Order Card 2 -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Order #ORD-2026-002</h4>
+                                <p class="order-date">7:00 PM Delivery</p>
+                            </div>
+                            <span class="order-status status-pending">Pending</span>
+                        </div>
+                        <div class="order-details">
+                            <div class="customer-info">
+                                <h5>Priya Sharma</h5>
+                                <p><strong>Phone:</strong> +91 98765 43211</p>
+                                <p><strong>Plan:</strong> Monthly Dinner</p>
+                                <p><strong>Address:</strong> HSR Layout, Sector 2, Plot 45, Bangalore - 560102</p>
+                                <p><strong>Special:</strong> Extra roti please</p>
+                            </div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="acceptOrder('ORD-2026-002')">Accept Order</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectOrder('ORD-2026-002')">Reject</button>
+                            <button class="btn btn-secondary btn-sm" onclick="messageCustomer('ORD-2026-002')">Message</button>
+                        </div>
+                    </div>
+
+                    <!-- Order Card 3 -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Order #ORD-2026-003</h4>
+                                <p class="order-date">1:00 PM Delivery</p>
+                            </div>
+                            <span class="order-status status-confirmed">Confirmed</span>
+                        </div>
+                        <div class="order-details">
+                            <div class="customer-info">
+                                <h5>Amit Patel</h5>
+                                <p><strong>Phone:</strong> +91 98765 43212</p>
+                                <p><strong>Plan:</strong> Daily Lunch</p>
+                                <p><strong>Address:</strong> BTM Layout, 2nd Stage, Bangalore - 560076</p>
+                                <p><strong>Special:</strong> No special instructions</p>
+                            </div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="markDelivered('ORD-2026-003')">Mark Delivered</button>
+                            <button class="btn btn-secondary btn-sm" onclick="callCustomer('+91 98765 43212')">Call Customer</button>
+                            <button class="btn btn-info btn-sm" onclick="viewOrderDetails('ORD-2026-003')">View Details</button>
+                        </div>
+                    </div>
+
+                    <!-- Order Card 4 -->
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Order #ORD-2026-004</h4>
+                                <p class="order-date">8:00 PM Delivery</p>
+                            </div>
+                            <span class="order-status status-delivered">Delivered</span>
+                        </div>
+                        <div class="order-details">
+                            <div class="customer-info">
+                                <h5>Neha Gupta</h5>
+                                <p><strong>Phone:</strong> +91 98765 43213</p>
+                                <p><strong>Plan:</strong> Weekly Dinner</p>
+                                <p><strong>Address:</strong> Indiranagar, 12th Main, Bangalore - 560038</p>
+                                <p><strong>Delivered:</strong> 7:45 PM</p>
+                            </div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="leaveReview('ORD-2026-004')">Leave Review</button>
+                            <button class="btn btn-info btn-sm" onclick="viewOrderDetails('ORD-2026-004')">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Subscription Requests -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Pending Subscription Requests</h2>
+                    <span class="badge badge-warning">3 New</span>
+                </div>
+                
+                <div class="orders-grid">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Subscription #SUB-2026-003</h4>
+                                <p class="order-date">Start: Feb 5, 2026</p>
+                            </div>
+                            <span class="order-status status-pending">Pending Approval</span>
+                        </div>
+                        <div class="order-details">
+                            <div class="customer-info">
+                                <h5>Amit Patel</h5>
+                                <p><strong>Phone:</strong> +91 98765 43212</p>
+                                <p><strong>Plan:</strong> Daily Lunch (30 days)</p>
+                                <p><strong>Amount:</strong> ₹3,600</p>
+                                <p><strong>Address:</strong> BTM Layout, 2nd Stage, Bangalore - 560076</p>
+                            </div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-success btn-sm" onclick="acceptSubscription('SUB-2026-003')">Accept</button>
+                            <button class="btn btn-secondary btn-sm" onclick="messageCustomer('SUB-2026-003')">Message</button>
+                            <button class="btn btn-danger btn-sm" onclick="rejectSubscription('SUB-2026-003')">Reject</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Statistics -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Order Statistics</h2>
+                    <div class="period-selector">
+                        <button class="btn btn-sm btn-secondary active">This Week</button>
+                        <button class="btn btn-sm btn-secondary">This Month</button>
+                        <button class="btn btn-sm btn-secondary">All Time</button>
+                    </div>
+                </div>
+                
+                <div class="stats-cards-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-value">38</div>
+                        <div class="stat-label">Completed Orders</div>
+                        <div class="stat-change positive">90% success rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-value">25 min</div>
+                        <div class="stat-label">Avg Delivery Time</div>
+                        <div class="stat-change positive">5 min faster</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-value">4.8</div>
+                        <div class="stat-label">Customer Rating</div>
+                        <div class="stat-change positive">+0.2 this month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <div class="stat-value">2</div>
+                        <div class="stat-label">Returns</div>
+                        <div class="stat-change negative">This week</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Cooks</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="menu.html">Manage Menu</a></li>
+                        <li><a href="orders.html">Orders</a></li>
+                        <li><a href="earnings.html">Earnings</a></li>
+                        <li><a href="#">Cook Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Orders functionality
+        function exportOrders() {
+            if (confirm('Export all orders for January 2026?')) {
+                console.log('Exporting orders...');
+                showMessage('Orders exported successfully!', 'success');
+                // Implement export logic
+            }
+        }
+
+        function applyFilters() {
+            const status = document.getElementById('statusFilter').value;
+            const date = document.getElementById('dateFilter').value;
+            const customer = document.getElementById('searchCustomer').value.toLowerCase();
+
+            console.log('Applying filters:', { status, date, customer });
+            showMessage('Filters applied successfully', 'info');
+            // Implement filter logic
+        }
+
+        function resetFilters() {
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('dateFilter').value = '';
+            document.getElementById('searchCustomer').value = '';
+            
+            console.log('Filters reset');
+            showMessage('Filters reset successfully', 'info');
+            // Implement reset logic
+        }
+
+        function markDelivered(orderId) {
+            if (confirm('Mark this order as delivered?')) {
+                console.log('Marking as delivered:', orderId);
+                showMessage('Order marked as delivered successfully!', 'success');
+                // Implement delivery logic
+            }
+        }
+
+        function callCustomer(phoneNumber) {
+            if (confirm(`Call customer at ${phoneNumber}?`)) {
+                window.open(`tel:${phoneNumber}`);
+            }
+        }
+
+        function acceptOrder(orderId) {
+            if (confirm('Accept this order?')) {
+                console.log('Accepting order:', orderId);
+                showMessage('Order accepted successfully!', 'success');
+                // Implement accept logic
+            }
+        }
+
+        function rejectOrder(orderId) {
+            if (confirm('Reject this order? This action cannot be undone.')) {
+                console.log('Rejecting order:', orderId);
+                showMessage('Order rejected', 'error');
+                // Implement reject logic
+            }
+        }
+
+        function messageCustomer(orderId) {
+            console.log('Opening message for:', orderId);
+            showMessage('Messaging feature coming soon!', 'info');
+            // Implement messaging logic
+        }
+
+        function viewOrderDetails(orderId) {
+            console.log('Viewing details for:', orderId);
+            showMessage(`Viewing details for ${orderId}`, 'info');
+            // Implement view details logic
+        }
+
+        function leaveReview(orderId) {
+            console.log('Leaving review for:', orderId);
+            showMessage('Review feature coming soon!', 'info');
+            // Implement review logic
+        }
+
+        function acceptSubscription(subscriptionId) {
+            if (confirm('Accept this subscription request?')) {
+                console.log('Accepting subscription:', subscriptionId);
+                showMessage('Subscription accepted successfully!', 'success');
+                // Implement accept logic
+            }
+        }
+
+        function rejectSubscription(subscriptionId) {
+            if (confirm('Reject this subscription request? This action cannot be undone.')) {
+                console.log('Rejecting subscription:', subscriptionId);
+                showMessage('Subscription rejected', 'error');
+                // Implement reject logic
+            }
+        }
+
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            // Remove any existing messages
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            // Insert at the top of page container
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Period selector functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const periodButtons = document.querySelectorAll('.period-selector button');
+            
+            periodButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    periodButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Update stats based on selected period
+                    const period = this.textContent;
+                    console.log('Selected period:', period);
+                    showMessage(`Showing statistics for ${period}`, 'info');
+                });
+            });
+
+            // Add navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+

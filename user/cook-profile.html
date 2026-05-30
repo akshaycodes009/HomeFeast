@@ -1,0 +1,509 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cook Profile - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="View detailed profile of home cooks and their homemade food offerings on AkshayFeast.">
+    <meta name="keywords" content="cook profile, home cook, homemade food, tiffin service, chef profile">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="browse.html">Browse Cooks</a>
+                <a href="orders.html">My Orders</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Cook Profile Header -->
+            <div class="cook-profile-header">
+                <div class="cook-profile-info">
+                    <img src="../assets/images/cook1.jpg" alt="Cook" class="cook-profile-avatar">
+                    <div class="cook-profile-details">
+                        <h1 class="cook-name">Sharma's Kitchen</h1>
+                        <div class="cook-rating">
+                            <i class="fas fa-star"></i> 4.8 (124 reviews)
+                        </div>
+                        <p class="cook-location">
+                            <i class="fas fa-map-marker-alt"></i> Koramangala, Bangalore
+                        </p>
+                        <div class="cook-badges">
+                            <span class="status-badge status-active">Available</span>
+                            <span class="badge badge-verified">Verified</span>
+                            <span class="badge badge-popular">Popular</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cook-profile-actions">
+                    <button class="btn btn-primary btn-lg" onclick="subscribeToCook()">
+                        <i class="fas fa-utensils"></i> Subscribe Now
+                    </button>
+                    <button class="btn btn-secondary" onclick="contactCook()">
+                        <i class="fas fa-phone"></i> Contact
+                    </button>
+                    <button class="btn btn-outline" onclick="addToFavorites()">
+                        <i class="fas fa-heart"></i> Add to Favorites
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cook Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="stat-value">1,245</div>
+                    <div class="stat-label">Orders Delivered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-value">2 Years</div>
+                    <div class="stat-label">Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-value">30 Mins</div>
+                    <div class="stat-label">Avg. Delivery Time</div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">About</h2>
+                </div>
+                <div class="about-content">
+                    <p>Welcome to Sharma's Kitchen! We are a family-run home cooking service specializing in authentic North Indian vegetarian cuisine. With over 2 years of experience, we take pride in preparing fresh, hygienic, and delicious homemade meals that remind you of home.</p>
+                    <p>Our daily menu includes a variety of dishes prepared with love and care, using only the freshest ingredients and traditional cooking methods. We believe in serving food that is not just tasty but also healthy and nutritious.</p>
+                </div>
+            </div>
+
+            <!-- Menu Section -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Today's Menu</h2>
+                    <div class="menu-tabs">
+                        <button class="tab-btn active" onclick="showMenu('lunch')">Lunch</button>
+                        <button class="tab-btn" onclick="showMenu('dinner')">Dinner</button>
+                    </div>
+                </div>
+                
+                <div class="menu-content" id="lunchMenu">
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <img src="../assets/images/default-cook-avatar.png" alt="Dal Makhani" class="menu-item-image">
+                            <div class="menu-item-info">
+                                <h4>Dal Makhani</h4>
+                                <p>Creamy black lentils cooked with butter and spices</p>
+                                <div class="menu-item-price">₹80</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <img src="../assets/images/default-cook-avatar.png" alt="Paneer Butter Masala" class="menu-item-image">
+                            <div class="menu-item-info">
+                                <h4>Paneer Butter Masala</h4>
+                                <p>Soft cottage cheese in rich tomato gravy</p>
+                                <div class="menu-item-price">₹90</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <img src="../assets/images/default-cook-avatar.png" alt="Mixed Vegetables" class="menu-item-image">
+                            <div class="menu-item-info">
+                                <h4>Mixed Vegetables</h4>
+                                <p>Seasonal vegetables cooked with aromatic spices</p>
+                                <div class="menu-item-price">₹70</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <img src="../assets/images/default-cook-avatar.png" alt="Roti" class="menu-item-image">
+                            <div class="menu-item-info">
+                                <h4>Fresh Roti</h4>
+                                <p>Soft and fluffy whole wheat bread</p>
+                                <div class="menu-item-price">₹10 each</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-content" id="dinnerMenu" style="display: none;">
+                    <div class="menu-grid">
+                        <div class="menu-item">
+                            <img src="../assets/images/default-cook-avatar.png" alt="Chole" class="menu-item-image">
+                            <div class="menu-item-info">
+                                <h4>Chole Masala</h4>
+                                <p>Spicy chickpea curry with aromatic spices</p>
+                                <div class="menu-item-price">₹75</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <img src="../assets/images/default-cook-avatar.png" alt="Palak Paneer" class="menu-item-image">
+                            <div class="menu-item-info">
+                                <h4>Palak Paneer</h4>
+                                <p>Cottage cheese in creamy spinach gravy</p>
+                                <div class="menu-item-price">₹85</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subscription Plans -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Subscription Plans</h2>
+                </div>
+                
+                <div class="subscription-plans">
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h3>Lunch Only</h3>
+                            <div class="plan-price">
+                                <span class="price">₹100</span>
+                                <span class="period">/day</span>
+                            </div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> 2 Vegetables + Dal + Rice</li>
+                                <li><i class="fas fa-check"></i> 4 Rotis</li>
+                                <li><i class="fas fa-check"></i> Salad & Pickle</li>
+                                <li><i class="fas fa-check"></i> Monday to Saturday</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary" onclick="selectPlan('lunch')">Select Plan</button>
+                    </div>
+                    
+                    <div class="plan-card featured">
+                        <div class="plan-badge">Most Popular</div>
+                        <div class="plan-header">
+                            <h3>Lunch & Dinner</h3>
+                            <div class="plan-price">
+                                <span class="price">₹180</span>
+                                <span class="period">/day</span>
+                            </div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Complete Lunch & Dinner</li>
+                                <li><i class="fas fa-check"></i> 4 Vegetables + Dal + Rice</li>
+                                <li><i class="fas fa-check"></i> 8 Rotis</li>
+                                <li><i class="fas fa-check"></i> Salad & Pickle</li>
+                                <li><i class="fas fa-check"></i> Daily Service</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary" onclick="selectPlan('lunch-dinner')">Select Plan</button>
+                    </div>
+                    
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h3>Dinner Only</h3>
+                            <div class="plan-price">
+                                <span class="price">₹80</span>
+                                <span class="period">/day</span>
+                            </div>
+                        </div>
+                        <div class="plan-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> 2 Vegetables + Dal + Rice</li>
+                                <li><i class="fas fa-check"></i> 4 Rotis</li>
+                                <li><i class="fas fa-check"></i> Salad & Pickle</li>
+                                <li><i class="fas fa-check"></i> Monday to Saturday</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary" onclick="selectPlan('dinner')">Select Plan</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Customer Reviews</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="writeReview()">
+                        <i class="fas fa-star"></i> Write Review
+                    </button>
+                </div>
+                
+                <div class="reviews-list">
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img src="../assets/images/users/user1.jpg" alt="User" class="review-avatar">
+                            <div class="review-info">
+                                <h4>Akshay Kumar</h4>
+                                <div class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="review-date">2 days ago</span>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>Amazing food quality! The taste is exactly like homemade. Sharma's Kitchen has become my daily meal service. Highly recommended!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img src="../assets/images/users/user2.jpg" alt="User" class="review-avatar">
+                            <div class="review-info">
+                                <h4>Priya Singh</h4>
+                                <div class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="review-date">1 week ago</span>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>Very hygienic and tasty food. The packaging is excellent and delivery is always on time. Great service!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img src="../assets/images/users/user3.jpg" alt="User" class="review-avatar">
+                            <div class="review-info">
+                                <h4>Amit Patel</h4>
+                                <div class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="review-date">2 weeks ago</span>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>Best home food service in Koramangala! The variety is good and the quality is consistent. Worth every penny!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="load-more-section">
+                    <button class="btn btn-secondary" onclick="loadMoreReviews()">
+                        <i class="fas fa-plus-circle"></i> Load More Reviews
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Customers</h4>
+                    <ul>
+                        <li><a href="browse.html">Browse Cooks</a></li>
+                        <li><a href="orders.html">My Orders</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Customer Support</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Cook profile functions
+        function subscribeToCook() {
+            console.log('Subscribing to cook...');
+            // Implement subscription logic
+        }
+
+        function contactCook() {
+            console.log('Contacting cook...');
+            // Implement contact logic
+        }
+
+        function addToFavorites() {
+            console.log('Adding to favorites...');
+            // Implement add to favorites logic
+        }
+
+        function showMenu(mealType) {
+            // Hide all menu content
+            document.getElementById('lunchMenu').style.display = 'none';
+            document.getElementById('dinnerMenu').style.display = 'none';
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.menu-tabs .tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected menu and add active class
+            if (mealType === 'lunch') {
+                document.getElementById('lunchMenu').style.display = 'block';
+                event.target.classList.add('active');
+            } else if (mealType === 'dinner') {
+                document.getElementById('dinnerMenu').style.display = 'block';
+                event.target.classList.add('active');
+            }
+        }
+
+        function selectPlan(planType) {
+            console.log('Selecting plan:', planType);
+            // Implement plan selection logic
+        }
+
+        function writeReview() {
+            console.log('Opening review form...');
+            // Implement review form logic
+        }
+
+        function loadMoreReviews() {
+            console.log('Loading more reviews...');
+            // Implement load more reviews logic
+        }
+
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Load cook data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const cookId = urlParams.get('cook') || 'sharmas-kitchen';
+            const cooks = {
+                'sharmas-kitchen': {
+                    name: "Sharma's Kitchen",
+                    ratingText: '4.8 (124 reviews)',
+                    location: 'Koramangala, Bangalore'
+                },
+                'moms-recipes': {
+                    name: "Mom's Recipes",
+                    ratingText: '4.9 (89 reviews)',
+                    location: 'Indiranagar, Bangalore'
+                },
+                'homely-meals': {
+                    name: 'Homely Meals',
+                    ratingText: '4.7 (156 reviews)',
+                    location: 'HSR Layout, Bangalore'
+                },
+                'healthy-bites': {
+                    name: 'Healthy Bites',
+                    ratingText: '4.7 (92 reviews)',
+                    location: 'Koramangala, Bangalore'
+                }
+            };
+
+            const cookData = cooks[cookId] || cooks['sharmas-kitchen'];
+
+            const nameEl = document.querySelector('.cook-name');
+            if (nameEl) {
+                nameEl.textContent = cookData.name;
+            }
+
+            const ratingEl = document.querySelector('.cook-rating');
+            if (ratingEl) {
+                ratingEl.innerHTML = `<i class="fas fa-star"></i> ${cookData.ratingText}`;
+            }
+
+            const locationEl = document.querySelector('.cook-location');
+            if (locationEl) {
+                locationEl.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${cookData.location}`;
+            }
+        });
+    </script>
+</body>
+</html>
+
+

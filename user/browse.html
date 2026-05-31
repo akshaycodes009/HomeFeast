@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Cooks - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Find verified home cooks near you for fresh homemade tiffin services.">
+    <meta name="keywords" content="browse cooks, homemade food, tiffin service, home cooks">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="browse.html">Browse Cooks</a>
+                <a href="orders.html">My Orders</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Find Home Cooks Near You</h1>
+                    <p class="page-subtitle">Discover verified home cooks for fresh, homemade meals</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="openFilters()">
+                        <i class="fas fa-filter"></i> Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="content-section">
+                <div class="search-bar">
+                    <div class="search-input-group">
+                        <input type="text" id="searchInput" placeholder="Search by cuisine, location, or cook name..." class="search-input">
+                        <button class="btn btn-primary" onclick="searchCooks()">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="filters-section" id="filtersSection" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cuisineFilter">Cuisine Type</label>
+                            <select id="cuisineFilter" class="form-control">
+                                <option value="">All Cuisines</option>
+                                <option value="north-indian">North Indian</option>
+                                <option value="south-indian">South Indian</option>
+                                <option value="maharashtrian">Maharashtrian</option>
+                                <option value="gujarati">Gujarati</option>
+                                <option value="chinese">Chinese</option>
+                                <option value="continental">Continental</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mealTypeFilter">Meal Type</label>
+                            <select id="mealTypeFilter" class="form-control">
+                                <option value="">All Types</option>
+                                <option value="veg">Vegetarian</option>
+                                <option value="non-veg">Non-Vegetarian</option>
+                                <option value="both">Both</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="priceFilter">Max Price per Day</label>
+                            <select id="priceFilter" class="form-control">
+                                <option value="">Any Price</option>
+                                <option value="100">Under ₹100</option>
+                                <option value="150">Under ₹150</option>
+                                <option value="200">Under ₹200</option>
+                                <option value="300">Under ₹300</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ratingFilter">Minimum Rating</label>
+                            <select id="ratingFilter" class="form-control">
+                                <option value="">Any Rating</option>
+                                <option value="4">4+ Stars</option>
+                                <option value="3">3+ Stars</option>
+                                <option value="2">2+ Stars</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                        <button class="btn btn-secondary" onclick="clearFilters()">Clear Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-label">Total Cooks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-value">4.8</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Verified Cooks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="stat-value">25</div>
+                    <div class="stat-label">Areas Covered</div>
+                </div>
+            </div>
+
+            <!-- Cooks Grid -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Home Cooks</h2>
+                    <div class="sort-options">
+                        <select id="sortSelect" class="form-control" onchange="sortCooks()">
+                            <option value="rating">Sort by Rating</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="distance">Distance</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="items-grid" id="cooksGrid">
+                    <!-- Cook Card 1 -->
+                    <div class="cook-card">
+                        <div class="cook-header">
+                            <img src="../assets/images/cook1.jpg" alt="Cook" class="cook-avatar">
+                            <div class="cook-status">
+                                <span class="status-badge status-active">Available</span>
+                            </div>
+                        </div>
+                        <div class="cook-info">
+                            <h4>Sharma's Kitchen</h4>
+                            <div class="cook-rating">
+                                <i class="fas fa-star"></i> 4.9 (124 reviews)
+                            </div>
+                            <p><i class="fas fa-map-marker-alt"></i> Koramangala, Bangalore</p>
+                            <p><i class="fas fa-utensils"></i> North Indian • Vegetarian</p>
+                            <div class="cook-price">
+                                <span class="price">₹120/day</span>
+                                <span class="meal-type">Lunch & Dinner</span>
+                            </div>
+                            <div class="cook-specialties">
+                                <span class="specialty-tag">Dal Makhani</span>
+                                <span class="specialty-tag">Paneer Butter</span>
+                                <span class="specialty-tag">Roti</span>
+                            </div>
+                        </div>
+                        <div class="cook-actions">
+                            <button class="btn btn-primary view-profile-btn" type="button" data-cook="Sharma's Kitchen">View Profile</button>
+                            <button class="btn btn-secondary" onclick="contactCook('CK001')">Contact</button>
+                        </div>
+                    </div>
+
+                    <!-- Cook Card 2 -->
+                    <div class="cook-card">
+                        <div class="cook-header">
+                            <img src="../assets/images/cook2.jpg" alt="Cook" class="cook-avatar">
+                            <div class="cook-status">
+                                <span class="status-badge status-active">Available</span>
+                            </div>
+                        </div>
+                        <div class="cook-info">
+                            <h4>Mom's Recipes</h4>
+                            <div class="cook-rating">
+                                <i class="fas fa-star"></i> 4.8 (89 reviews)
+                            </div>
+                            <p><i class="fas fa-map-marker-alt"></i> Indiranagar, Bangalore</p>
+                            <p><i class="fas fa-utensils"></i> South Indian • Both</p>
+                            <div class="cook-price">
+                                <span class="price">₹150/day</span>
+                                <span class="meal-type">Lunch & Dinner</span>
+                            </div>
+                            <div class="cook-specialties">
+                                <span class="specialty-tag">Idli Dosa</span>
+                                <span class="specialty-tag">Sambar</span>
+                                <span class="specialty-tag">Chutney</span>
+                            </div>
+                        </div>
+                        <div class="cook-actions">
+                            <button class="btn btn-primary view-profile-btn" type="button" data-cook="Mom's Recipes">View Profile</button>
+                            <button class="btn btn-secondary" onclick="contactCook('CK002')">Contact</button>
+                        </div>
+                    </div>
+
+                    <!-- Cook Card 3 -->
+                    <div class="cook-card">
+                        <div class="cook-header">
+                            <img src="../assets/images/cook3.jpg" alt="Cook" class="cook-avatar">
+                            <div class="cook-status">
+                                <span class="status-badge status-active">Available</span>
+                            </div>
+                        </div>
+                        <div class="cook-info">
+                            <h4>Homely Meals</h4>
+                            <div class="cook-rating">
+                                <i class="fas fa-star"></i> 4.7 (156 reviews)
+                            </div>
+                            <p><i class="fas fa-map-marker-alt"></i> Jayanagar, Bangalore</p>
+                            <p><i class="fas fa-utensils"></i> Maharashtrian • Vegetarian</p>
+                            <div class="cook-price">
+                                <span class="price">₹100/day</span>
+                                <span class="meal-type">Lunch & Dinner</span>
+                            </div>
+                            <div class="cook-specialties">
+                                <span class="specialty-tag">Puran Poli</span>
+                                <span class="specialty-tag">Varan Bhaat</span>
+                                <span class="specialty-tag">Amti</span>
+                            </div>
+                        </div>
+                        <div class="cook-actions">
+                            <button class="btn btn-primary view-profile-btn" type="button" data-cook="Homely Meals">View Profile</button>
+                            <button class="btn btn-secondary" onclick="contactCook('CK003')">Contact</button>
+                        </div>
+                    </div>
+
+                    <!-- Cook Card 4 -->
+                    <div class="cook-card">
+                        <div class="cook-header">
+                            <img src="../assets/images/cook4.jpg" alt="Cook" class="cook-avatar">
+                            <div class="cook-status">
+                                <span class="status-badge status-pending">Busy</span>
+                            </div>
+                        </div>
+                        <div class="cook-info">
+                            <h4>Healthy Bites</h4>
+                            <div class="cook-rating">
+                                <i class="fas fa-star"></i> 4.6 (92 reviews)
+                            </div>
+                            <p><i class="fas fa-map-marker-alt"></i> Whitefield, Bangalore</p>
+                            <p><i class="fas fa-utensils"></i> Continental • Both</p>
+                            <div class="cook-price">
+                                <span class="price">₹200/day</span>
+                                <span class="meal-type">Lunch & Dinner</span>
+                            </div>
+                            <div class="cook-specialties">
+                                <span class="specialty-tag">Pasta</span>
+                                <span class="specialty-tag">Grilled Chicken</span>
+                                <span class="specialty-tag">Salads</span>
+                            </div>
+                        </div>
+                        <div class="cook-actions">
+                            <button class="btn btn-primary view-profile-btn" type="button" data-cook="Healthy Bites">View Profile</button>
+                            <button class="btn btn-secondary" onclick="contactCook('CK004')">Contact</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More -->
+                <div class="load-more-section">
+                    <button class="btn btn-primary btn-lg" onclick="loadMoreCooks()">
+                        <i class="fas fa-plus-circle"></i> Load More Cooks
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Customers</h4>
+                    <ul>
+                        <li><a href="browse.html">Browse Cooks</a></li>
+                        <li><a href="orders.html">My Orders</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Customer Support</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Search functionality
+        function searchCooks() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            console.log('Searching for:', searchTerm);
+            // Implement search logic here
+        }
+
+        // Filter functionality
+        function openFilters() {
+            const filtersSection = document.getElementById('filtersSection');
+            filtersSection.style.display = filtersSection.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function applyFilters() {
+            const cuisine = document.getElementById('cuisineFilter').value;
+            const mealType = document.getElementById('mealTypeFilter').value;
+            const price = document.getElementById('priceFilter').value;
+            const rating = document.getElementById('ratingFilter').value;
+            
+            console.log('Applying filters:', { cuisine, mealType, price, rating });
+            // Implement filter logic here
+        }
+
+        function clearFilters() {
+            document.getElementById('cuisineFilter').value = '';
+            document.getElementById('mealTypeFilter').value = '';
+            document.getElementById('priceFilter').value = '';
+            document.getElementById('ratingFilter').value = '';
+            
+            console.log('Filters cleared');
+            // Implement clear logic here
+        }
+
+        // Sort functionality
+        function sortCooks() {
+            const sortBy = document.getElementById('sortSelect').value;
+            console.log('Sorting by:', sortBy);
+            // Implement sort logic here
+        }
+
+        // Cook actions
+        function viewCookProfile(cookNameOrId) {
+            const cookKey = mapCookToKey(cookNameOrId);
+            window.location.href = `cook-profile.html?cook=${encodeURIComponent(cookKey)}`;
+        }
+
+        function mapCookToKey(cookNameOrId) {
+            const cookIdToKey = {
+                CK001: 'sharmas-kitchen',
+                CK002: 'moms-recipes',
+                CK003: 'homely-meals',
+                CK004: 'healthy-bites'
+            };
+
+            if (cookIdToKey[cookNameOrId]) return cookIdToKey[cookNameOrId];
+            return slugifyCookName(String(cookNameOrId || ''));
+        }
+
+        function slugifyCookName(name) {
+            const cleaned = name
+                .toLowerCase()
+                .replace(/['’]/g, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            return cleaned || 'sharmas-kitchen';
+        }
+
+        function contactCook(cookId) {
+            console.log('Contacting cook:', cookId);
+            // Implement contact logic here
+        }
+
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function loadMoreCooks() {
+            console.log('Loading more cooks...');
+            // Implement load more logic here
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.view-profile-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    viewCookProfile(this.getAttribute('data-cook'));
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+

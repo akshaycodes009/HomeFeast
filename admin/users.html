@@ -1,0 +1,570 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - AkshayFeast Admin | Homemade Tiffin Service</title>
+    <meta name="description" content="Manage customer accounts, monitor user activity, and handle user support on AkshayFeast platform.">
+    <meta name="keywords" content="admin users, customer management, user accounts, homemade food, tiffin service">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/admin-enhanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="user-management-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast Admin</h2>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="users.html" class="active">Users</a>
+                <a href="cooks.html">Cooks</a>
+                <a href="orders.html">Orders</a>
+                <a href="complaints.html">Complaints</a>
+                <a href="reports.html">Reports</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutAdmin()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Manage Users 👥</h1>
+                    <p class="page-subtitle">View and manage customer accounts</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="exportUserData()">
+                        <i class="fas fa-download"></i> Export Users
+                    </button>
+                    <button class="btn btn-secondary" onclick="sendBulkNotification()">
+                        <i class="fas fa-bell"></i> Send Notification
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value">1,248</div>
+                    <div class="stat-label">Total Users</div>
+                    <div class="stat-change positive">+12% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value">342</div>
+                    <div class="stat-label">Active Today</div>
+                    <div class="stat-change positive">+8% from yesterday</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🆕</div>
+                    <div class="stat-value">28</div>
+                    <div class="stat-label">New Registrations</div>
+                    <div class="stat-change positive">Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-value">78.4%</div>
+                    <div class="stat-label">Retention Rate</div>
+                    <div class="stat-change positive">+2.1% improvement</div>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Search & Filters</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="resetFilters()">Reset All</button>
+                </div>
+                
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="userSearch">Search Users</label>
+                        <input type="text" id="userSearch" placeholder="Enter name, email, or phone...">
+                    </div>
+                    <div class="form-group">
+                        <label for="statusFilter">Account Status</label>
+                        <select id="statusFilter">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="suspended">Suspended</option>
+                            <option value="banned">Banned</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="registrationFilter">Registration Date</label>
+                        <select id="registrationFilter">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">This Quarter</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subscriptionFilter">Subscription Status</label>
+                        <select id="subscriptionFilter">
+                            <option value="">All Users</option>
+                            <option value="subscribed">Subscribed</option>
+                            <option value="trial">Trial Users</option>
+                            <option value="expired">Expired</option>
+                            <option value="none">No Subscription</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent User Activities</h2>
+                    <span class="badge badge-info">Live Updates</span>
+                </div>
+                
+                <div class="orders-grid">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>New Registration</h4>
+                                <p class="order-date">2 minutes ago</p>
+                            </div>
+                            <span class="order-status status-confirmed">New User</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Priya Sharma (priya.sharma@email.com)</h5>
+                            <p><strong>Phone:</strong> +91 98765 43210 • <strong>Location:</strong> Koramangala</p>
+                            <p><strong>Source:</strong> Google Search • <strong>Device:</strong> Mobile</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="viewUserProfile('USR001')">View Profile</button>
+                            <button class="btn btn-secondary btn-sm" onclick="sendWelcomeEmail('USR001')">Send Welcome</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>First Order Placed</h4>
+                                <p class="order-date">15 minutes ago</p>
+                            </div>
+                            <span class="order-status status-delivered">Order Placed</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Akshay Kumar (akshay.kumar@email.com)</h5>
+                            <p><strong>Order:</strong> #ORD-2024-159 • <strong>Cook:</strong> Sharma's Kitchen</p>
+                            <p><strong>Amount:</strong> ₹120 • <strong>Type:</strong> First-time customer</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="viewUserProfile('USR002')">View Profile</button>
+                            <button class="btn btn-success btn-sm" onclick="trackOrder('ORD-2024-159')">Track Order</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-info">
+                                <h4>Subscription Renewed</h4>
+                                <p class="order-date">1 hour ago</p>
+                            </div>
+                            <span class="order-status status-confirmed">Renewal</span>
+                        </div>
+                        <div class="order-info">
+                            <h5>Amit Patel (amit.patel@email.com)</h5>
+                            <p><strong>Plan:</strong> Monthly Lunch • <strong>Cook:</strong> Mom's Recipes</p>
+                            <p><strong>Amount:</strong> ₹3,000 • <strong>Duration:</strong> 30 days</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-primary btn-sm" onclick="viewUserProfile('USR003')">View Profile</button>
+                            <button class="btn btn-secondary btn-sm" onclick="sendRenewalConfirmation('USR003')">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Users Table -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">All Users</h2>
+                    <div class="performance-summary">
+                        <span class="performance-stat">1,248 total</span>
+                        <span class="performance-change">+12% this month</span>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Orders</th>
+                                <th>Spent</th>
+                                <th>Status</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>#USR-001</strong></td>
+                                <td>Priya Sharma</td>
+                                <td>priya.sharma@email.com</td>
+                                <td>+91 98765 43210</td>
+                                <td>0</td>
+                                <td>₹0</td>
+                                <td><span class="order-status status-confirmed">Active</span></td>
+                                <td>Jan 30, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewUserProfile('USR-001')">View</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="editUser('USR-001')">Edit</button>
+                                        <button class="btn btn-info btn-sm" onclick="contactUser('USR-001')">Contact</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#USR-002</strong></td>
+                                <td>Akshay Kumar</td>
+                                <td>akshay.kumar@email.com</td>
+                                <td>+91 98765 43211</td>
+                                <td>1</td>
+                                <td>₹120</td>
+                                <td><span class="order-status status-confirmed">Active</span></td>
+                                <td>Jan 29, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewUserProfile('USR-002')">View</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="editUser('USR-002')">Edit</button>
+                                        <button class="btn btn-info btn-sm" onclick="contactUser('USR-002')">Contact</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#USR-003</strong></td>
+                                <td>Amit Patel</td>
+                                <td>amit.patel@email.com</td>
+                                <td>+91 98765 43212</td>
+                                <td>24</td>
+                                <td>₹2,880</td>
+                                <td><span class="order-status status-confirmed">Active</span></td>
+                                <td>Jan 15, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewUserProfile('USR-003')">View</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="editUser('USR-003')">Edit</button>
+                                        <button class="btn btn-info btn-sm" onclick="contactUser('USR-003')">Contact</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#USR-004</strong></td>
+                                <td>Neha Singh</td>
+                                <td>neha.singh@email.com</td>
+                                <td>+91 98765 43213</td>
+                                <td>18</td>
+                                <td>₹2,160</td>
+                                <td><span class="order-status status-pending">Inactive</span></td>
+                                <td>Dec 28, 2025</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewUserProfile('USR-004')">View</button>
+                                        <button class="btn btn-warning btn-sm" onclick="reactivateUser('USR-004')">Reactivate</button>
+                                        <button class="btn btn-info btn-sm" onclick="contactUser('USR-004')">Contact</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>#USR-005</strong></td>
+                                <td>Rohit Gupta</td>
+                                <td>rohit.gupta@email.com</td>
+                                <td>+91 98765 43214</td>
+                                <td>32</td>
+                                <td>₹3,840</td>
+                                <td><span class="order-status status-delivered">Premium</span></td>
+                                <td>Dec 15, 2025</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-primary btn-sm" onclick="viewUserProfile('USR-005')">View</button>
+                                        <button class="btn btn-secondary btn-sm" onclick="editUser('USR-005')">Edit</button>
+                                        <button class="btn btn-success btn-sm" onclick="upgradeUser('USR-005')">Upgrade</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- User Analytics -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">User Analytics</h2>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-title">Daily Active Users</div>
+                        <div class="report-value">342</div>
+                        <div class="report-subtitle">Last 24 hours</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">New Registrations</div>
+                        <div class="report-value">28</div>
+                        <div class="report-subtitle">Today</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">User Retention</div>
+                        <div class="report-value">78.4%</div>
+                        <div class="report-subtitle">30-day retention</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Avg Orders/User</div>
+                        <div class="report-value">2.8</div>
+                        <div class="report-subtitle">Per month</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Segments -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">User Segments</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="createSegment()">Create Segment</button>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-title">New Users</div>
+                        <div class="report-value">156</div>
+                        <div class="report-subtitle">Joined this month</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Active Subscribers</div>
+                        <div class="report-value">89</div>
+                        <div class="report-subtitle">Monthly plans</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Premium Users</div>
+                        <div class="report-value">45</div>
+                        <div class="report-subtitle">High value customers</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Inactive Users</div>
+                        <div class="report-value">67</div>
+                        <div class="report-subtitle">Need re-engagement</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="btn btn-secondary" onclick="previousPage()">Previous</button>
+                <span>Page 1 of 250</span>
+                <button class="btn btn-secondary" onclick="nextPage()">Next</button>
+            </div>
+
+                    </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast Admin</h3>
+                    </div>
+                    <p>Managing homemade food delivery platform efficiently</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="cooks.html">Cook Management</a></li>
+                        <li><a href="orders.html">Order Monitoring</a></li>
+                        <li><a href="complaints.html">Complaints</a></li>
+                        <li><a href="#">Admin Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>User Management</h4>
+                    <ul>
+                        <li><a href="#activities">Recent Activities</a></li>
+                        <li><a href="#all-users">All Users</a></li>
+                        <li><a href="#analytics">User Analytics</a></li>
+                        <li><a href="#segments">User Segments</a></li>
+                        <li><a href="#">User Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> admin@AkshayFeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> 24/7 Support</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Admin Users functionality
+        function viewUserProfile(userId) {
+            console.log('Viewing user profile:', userId);
+            showMessage('Opening user profile...', 'info');
+        }
+
+        function editUser(userId) {
+            console.log('Editing user:', userId);
+            showMessage('Opening edit form...', 'info');
+        }
+
+        function contactUser(userId) {
+            console.log('Contacting user:', userId);
+            showMessage('Opening contact form...', 'info');
+        }
+
+        function sendWelcomeEmail(userId) {
+            console.log('Sending welcome email to:', userId);
+            showMessage('Welcome email sent successfully!', 'success');
+        }
+
+        function trackOrder(orderId) {
+            console.log('Tracking order:', orderId);
+            showMessage('Opening order tracking...', 'info');
+        }
+
+        function sendRenewalConfirmation(userId) {
+            console.log('Sending renewal confirmation to:', userId);
+            showMessage('Renewal confirmation sent!', 'success');
+        }
+
+        function reactivateUser(userId) {
+            if (confirm('Reactivate this user account?')) {
+                console.log('Reactivating user:', userId);
+                showMessage('User reactivated successfully', 'success');
+            }
+        }
+
+        function upgradeUser(userId) {
+            console.log('Upgrading user:', userId);
+            showMessage('Opening upgrade options...', 'info');
+        }
+
+        function applyFilters() {
+            console.log('Applying filters...');
+            showMessage('Filters applied successfully', 'success');
+        }
+
+        function resetFilters() {
+            document.getElementById('userSearch').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('registrationFilter').value = '';
+            document.getElementById('subscriptionFilter').value = '';
+            showMessage('Filters reset successfully', 'info');
+        }
+
+        function exportUserData() {
+            console.log('Exporting user data...');
+            showMessage('Exporting user data to Excel...', 'info');
+        }
+
+        function sendBulkNotification() {
+            console.log('Opening bulk notification form...');
+            showMessage('Opening notification composer...', 'info');
+        }
+
+        function createSegment() {
+            console.log('Opening segment creator...');
+            showMessage('Opening segment creator...', 'info');
+        }
+
+        function previousPage() {
+            console.log('Going to previous page...');
+        }
+
+        function nextPage() {
+            console.log('Going to next page...');
+        }
+
+        function logoutAdmin() {
+            if (confirm('Are you sure you want to logout from admin panel?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage && !existingMessage.classList.contains('notification-success')) {
+                existingMessage.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
+            
+
+

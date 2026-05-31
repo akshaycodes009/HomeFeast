@@ -1,0 +1,564 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Manage your account settings, notifications, and preferences on AkshayFeast.">
+    <meta name="keywords" content="settings, account settings, notifications, preferences, tiffin service">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/settings.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="browse.html">Browse Cooks</a>
+                <a href="orders.html">My Orders</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Settings</h1>
+                    <p class="page-subtitle">Manage your account settings and preferences</p>
+                </div>
+            </div>
+
+            <!-- Settings Sections -->
+            <div class="settings-sections">
+                <!-- Tab Navigation -->
+                <div class="section-tabs">
+                    <button class="tab-btn active" data-section="general">General</button>
+                    <button class="tab-btn" data-section="notifications">Notifications</button>
+                    <button class="tab-btn" data-section="privacy">Privacy</button>
+                    <button class="tab-btn" data-section="security">Security</button>
+                    <button class="tab-btn" data-section="account">Account</button>
+                </div>
+
+                <!-- General Settings Section -->
+                <div id="general-section" class="settings-section">
+                    <h3>General Settings</h3>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label for="language">Language</label>
+                            <select id="language" name="language">
+                                <option value="en" selected>English</option>
+                                <option value="hi">हिंदी</option>
+                                <option value="mr">मराठाठी</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="timezone">Timezone</label>
+                            <select id="timezone" name="timezone">
+                                <option value="UTC" selected>UTC</option>
+                                <option value="Asia/Kolkata">Asia/Kolkata</option>
+                                <option value="Asia/Dubai">Asia/Dubai</option>
+                                <option value="America/New_York">America/New_York</option>
+                                <option value="Europe/London">Europe/London</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="currency">Currency</label>
+                            <select id="currency" name="currency">
+                                <option value="INR" selected>₹ Indian Rupee</option>
+                                <option value="USD">$ US Dollar</option>
+                                <option value="EUR">€ Euro</option>
+                                <option value="GBP">£ British Pound</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox" checked>
+                                <span>Enable dark mode</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox" checked>
+                                <span>Show notifications in browser</span>
+                            </label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Notifications Settings Section -->
+                <div id="notifications-section" class="settings-section hidden">
+                    <h3>Notification Preferences</h3>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox" checked>
+                                <span>Order status updates</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox" checked>
+                                <span>Promotional offers</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox">
+                                <span>New cook recommendations</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox" checked>
+                                <span>Weekly meal suggestions</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox">
+                                <span>Payment reminders</span>
+                            </label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Privacy Settings Section -->
+                <div id="privacy-section" class="settings-section hidden">
+                    <h3>Privacy Settings</h3>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox" checked>
+                                <span>Profile visible to other users</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox">
+                                <span>Show online status</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox" checked>
+                                <span>Allow cook recommendations</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox">
+                                <span>Share data with partners</span>
+                            </label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Security Settings Section -->
+                <div id="security-section" class="settings-section hidden">
+                    <h3>Security Settings</h3>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" name="currentPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" name="newPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox" checked>
+                                <span>Two-factor authentication</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="setting-toggle">
+                                <input type="checkbox" checked>
+                                <span>Login notifications</span>
+                            </label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Update Password</button>
+                            <button type="button" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Account Settings Section -->
+                <div id="account-section" class="settings-section hidden">
+                    <h3>Account Management</h3>
+                    <div class="account-item">
+                        <h4>👤 Account Status</h4>
+                        <div class="account-info">
+                            <span class="status-badge status-active">Active</span>
+                            <p>Your account is active and in good standing</p>
+                        </div>
+                        <div class="account-actions">
+                            <button class="btn btn-secondary">View Details</button>
+                        </div>
+                    </div>
+
+                    <div class="account-item">
+                        <h4>📧 Email Address</h4>
+                        <div class="account-info">
+                            <p><strong>Current:</strong> john.doe@example.com</p>
+                        </div>
+                        <div class="account-actions">
+                            <button class="btn btn-secondary">Change Email</button>
+                            <button class="btn btn-secondary">Verify Email</button>
+                        </div>
+                    </div>
+
+                    <div class="account-item danger-zone">
+                        <h4>⚠️ Account Actions</h4>
+                        <div class="danger-warning">
+                            <p><strong>⚠️ Warning:</strong> These actions are irreversible. Please proceed with caution.</p>
+                        </div>
+                        <div class="danger-actions">
+                            <button class="btn btn-secondary">📥 Download My Data</button>
+                            <button class="btn btn-secondary">⏸️ Deactivate Account</button>
+                            <button class="btn btn-delete">🗑️ Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Customers</h4>
+                    <ul>
+                        <li><a href="browse.html">Browse Cooks</a></li>
+                        <li><a href="orders.html">My Orders</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Customer Support</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Settings management functions
+        function saveAllSettings() {
+            const settings = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                notifications: {
+                    orderStatus: document.getElementById('orderStatus').checked,
+                    deliveryReminders: document.getElementById('deliveryReminders').checked,
+                    promotionalOffers: document.getElementById('promotionalOffers').checked,
+                    newCooks: document.getElementById('newCooks').checked
+                },
+                privacy: {
+                    profileVisibility: document.getElementById('profileVisibility').value,
+                    orderHistory: document.getElementById('orderHistory').value,
+                    showReviews: document.getElementById('showReviews').checked
+                },
+                security: {
+                    twoFactor: document.getElementById('twoFactor').checked,
+                    loginAlerts: document.getElementById('loginAlerts').checked
+                }
+            };
+            
+            console.log('Saving settings:', settings);
+            alert('Settings saved successfully!');
+            // Implement save logic here
+        }
+
+        function changePassword() {
+            console.log('Opening password change dialog...');
+            // Implement password change logic
+        }
+
+        function addPaymentMethod() {
+            console.log('Opening add payment method dialog...');
+            // Implement add payment method logic
+        }
+
+        function deleteAccount() {
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                if (confirm('This will permanently delete all your data. Are you absolutely sure?')) {
+                    console.log('Deleting account...');
+                    // Implement account deletion logic
+                }
+            }
+        }
+
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Settings management functions
+        function showSection(sectionName) {
+            // Hide all sections with fade out
+            const sections = document.querySelectorAll('.settings-section');
+            sections.forEach(section => {
+                if (!section.classList.contains('hidden')) {
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        section.classList.add('hidden');
+                    }, 200);
+                }
+            });
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected section with fade in
+            setTimeout(() => {
+                const targetSection = document.getElementById(sectionName + '-section');
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                    targetSection.style.opacity = '0';
+                    targetSection.style.transform = 'translateY(20px)';
+                    
+                    // Trigger reflow and animate
+                    setTimeout(() => {
+                        targetSection.style.opacity = '1';
+                        targetSection.style.transform = 'translateY(0)';
+                    }, 50);
+                }
+                
+                // Add active class to clicked tab
+                const activeTab = document.querySelector(`[data-section="${sectionName}"]`);
+                if (activeTab) {
+                    activeTab.classList.add('active');
+                }
+            }, 250);
+        }
+
+        function resetForm(formId) {
+            document.getElementById(formId).reset();
+        }
+
+        function saveGeneralSettings() {
+            showMessage('General settings saved successfully!', 'success');
+        }
+
+        function saveNotificationSettings() {
+            showMessage('Notification preferences saved!', 'success');
+        }
+
+        function savePrivacySettings() {
+            showMessage('Privacy settings saved!', 'success');
+        }
+
+        function updatePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword !== confirmPassword) {
+                showMessage('New passwords do not match!', 'error');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                showMessage('Password must be at least 6 characters long!', 'error');
+                return;
+            }
+            
+            showMessage('Password updated successfully!', 'success');
+            resetForm('securityForm');
+        }
+
+        function downloadUserData() {
+            alert('Your data download would start here in JSON format');
+        }
+
+        function deactivateAccount() {
+            if (confirm('Are you sure you want to deactivate your account? You can reactivate it later by logging back in.')) {
+                alert('Account deactivated successfully');
+            }
+        }
+
+        function confirmDeleteAccount() {
+            if (confirm('Are you sure you want to permanently delete your account? This action cannot be undone and all your data will be permanently removed.')) {
+                alert('Account deletion process would start here with email confirmation');
+            }
+        }
+
+        function showMessage(message, type) {
+            // Remove any existing messages
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            // Insert at the top of main content
+            const mainContent = document.querySelector('.settings-sections');
+            if (mainContent) {
+                mainContent.insertBefore(messageDiv, mainContent.firstChild);
+            }
+            
+            // Remove message after 3 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Load user settings on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(sessionStorage.getItem('user'));
+            if (user) {
+                // Load user settings
+                console.log('Loading user settings:', user);
+            }
+
+            // Show general section by default with animation
+            const generalSection = document.getElementById('general-section');
+            if (generalSection) {
+                generalSection.classList.remove('hidden');
+                setTimeout(() => {
+                    generalSection.style.opacity = '1';
+                    generalSection.style.transform = 'translateY(0)';
+                }, 100);
+            }
+            
+            // Set default tab
+            const generalTab = document.querySelector('.tab-btn');
+            if (generalTab) {
+                generalTab.classList.add('active');
+            }
+            
+            // Bind tab click events
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionName = this.getAttribute('data-section');
+                    showSection(sectionName);
+                });
+            });
+
+            // Form submissions
+            document.querySelectorAll('.settings-form').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.closest('.settings-section').id;
+                    const sectionName = sectionId.replace('-section', '');
+                    
+                    switch(sectionName) {
+                        case 'general':
+                            saveGeneralSettings();
+                            break;
+                        case 'notifications':
+                            saveNotificationSettings();
+                            break;
+                        case 'privacy':
+                            savePrivacySettings();
+                            break;
+                        case 'security':
+                            updatePassword();
+                            break;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+

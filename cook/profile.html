@@ -1,0 +1,781 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cook Profile - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Manage your cook profile, update business information, and track your performance with AkshayFeast.">
+    <meta name="keywords" content="cook profile, homemade food business, tiffin service profile, kitchen management">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/profile-enhanced.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="menu.html">Manage Menu</a>
+                <a href="orders.html">Orders</a>
+                <a href="earnings.html">Earnings</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">My Profile 👤</h1>
+                    <p class="page-subtitle">Manage your kitchen and business information</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="window.location.href='dashboard.html'">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profile Overview -->
+            <div class="content-section">
+                <div class="profile-overview">
+                    <div class="profile-avatar-section">
+                        <div class="profile-avatar">
+                            <img src="../assets/images/default-cook-avatar.png" alt="Profile Avatar" id="avatarImage">
+                            <div class="avatar-upload">
+                                <button class="btn btn-secondary btn-sm" onclick="document.getElementById('avatarInput').click()">
+                                    <i class="fas fa-camera"></i> Change Photo
+                                </button>
+                                <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="profileName">Mrs. Sharma</h2>
+                            <p class="profile-email">sharma.kitchen@email.com</p>
+                            <p class="profile-phone">+91 98765 43211</p>
+                            <div class="profile-status">
+                                <span class="status-badge status-approved">Verified Cook</span>
+                                <span class="member-since">Cook since January 2023</span>
+                            </div>
+                            <div class="cook-rating-display">
+                                <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                                <span>4.8 (124 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <!-- Profile Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-value">3+ Years</div>
+                    <div class="stat-label">Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value">28</div>
+                    <div class="stat-label">Active Customers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="stat-value">25</div>
+                    <div class="stat-label">Menu Items</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-value">4.8</div>
+                    <div class="stat-label">Rating</div>
+                </div>
+            </div>
+
+            <!-- Profile Sections -->
+            <div class="content-section">
+                <div class="section-tabs">
+                    <button class="tab-btn active" onclick="showSection('business')">Business Info</button>
+                    <button class="tab-btn" onclick="showSection('personal')">Personal Info</button>
+                    <button class="tab-btn" onclick="showSection('banking')">Banking Details</button>
+                </div>
+
+                <!-- Business Information Section -->
+                <div id="business-section" class="profile-section">
+                    <div class="section-content">
+                        <div class="form-header">
+                            <div class="form-header-icon business-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="form-header-content">
+                                <h3>Business Information</h3>
+                                <p>Manage your kitchen details and service information</p>
+                            </div>
+                        </div>
+                        <form id="businessInfoForm" class="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="kitchenName">
+                                        <i class="fas fa-store"></i> Kitchen Name
+                                    </label>
+                                    <input type="text" id="kitchenName" name="kitchenName" value="Sharma's Kitchen" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cuisineType">
+                                        <i class="fas fa-globe-asia"></i> Primary Cuisine
+                                    </label>
+                                    <select id="cuisineType" name="cuisineType" required>
+                                        <option value="">Select Cuisine</option>
+                                        <option value="north-indian" selected>North Indian</option>
+                                        <option value="south-indian">South Indian</option>
+                                        <option value="maharashtrian">Maharashtrian</option>
+                                        <option value="punjabi">Punjabi</option>
+                                        <option value="gujarati">Gujarati</option>
+                                        <option value="chinese">Chinese</option>
+                                        <option value="continental">Continental</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="kitchenDescription">
+                                    <i class="fas fa-align-left"></i> Kitchen Description
+                                </label>
+                                <textarea id="kitchenDescription" name="kitchenDescription" rows="3" placeholder="Describe your kitchen and cooking style...">Homely North Indian food prepared with love and hygiene. Specializing in traditional Rajasthani and Punjabi cuisine.</textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="mealType">
+                                        <i class="fas fa-leaf"></i> Meal Type
+                                    </label>
+                                    <select id="mealType" name="mealType" required>
+                                        <option value="veg" selected>Vegetarian</option>
+                                        <option value="non-veg">Non-Vegetarian</option>
+                                        <option value="both">Both</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="serviceArea">
+                                        <i class="fas fa-map-marked-alt"></i> Service Areas
+                                    </label>
+                                    <input type="text" id="serviceArea" name="serviceArea" value="Koramangala, HSR Layout, BTM Layout" placeholder="Enter areas you serve (comma separated)">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dailyPrice">
+                                        <i class="fas fa-rupee-sign"></i> Daily Price (₹)
+                                    </label>
+                                    <input type="number" id="dailyPrice" name="dailyPrice" value="120" min="50" max="500" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="weeklyPrice">
+                                        <i class="fas fa-calendar-week"></i> Weekly Price (₹)
+                                    </label>
+                                    <input type="number" id="weeklyPrice" name="weeklyPrice" value="840" min="300" max="3000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="monthlyPrice">
+                                        <i class="fas fa-calendar-alt"></i> Monthly Price (₹)
+                                    </label>
+                                    <input type="number" id="monthlyPrice" name="monthlyPrice" value="3600" min="1000" max="10000" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="deliveryTimings">
+                                    <i class="fas fa-clock"></i> Delivery Timings
+                                </label>
+                                <div class="timing-grid">
+                                    <div class="timing-item">
+                                        <label>Lunch Delivery</label>
+                                        <input type="time" id="lunchStart" name="lunchStart" value="12:00">
+                                        <span>to</span>
+                                        <input type="time" id="lunchEnd" name="lunchEnd" value="13:00">
+                                    </div>
+                                    <div class="timing-item">
+                                        <label>Dinner Delivery</label>
+                                        <input type="time" id="dinnerStart" name="dinnerStart" value="19:00">
+                                        <span>to</span>
+                                        <input type="time" id="dinnerEnd" name="dinnerEnd" value="20:00">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="specialties">
+                                    <i class="fas fa-star"></i> Specialties
+                                </label>
+                                <textarea id="specialties" name="specialties" rows="2" placeholder="Mention your signature dishes...">Dal Makhani, Paneer Butter Masala, Rajma Chawal, Gajar ka Halwa</textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Business Info
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="resetForm('businessInfoForm')">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Personal Information Section -->
+                <div id="personal-section" class="profile-section hidden">
+                    <div class="section-content">
+                        <div class="form-header">
+                            <div class="form-header-icon personal-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="form-header-content">
+                                <h3>Personal Information</h3>
+                                <p>Manage your personal details and contact information</p>
+                            </div>
+                        </div>
+                        <form id="personalInfoForm" class="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">
+                                        <i class="fas fa-user"></i> First Name
+                                    </label>
+                                    <input type="text" id="firstName" name="firstName" value="Mrs." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">
+                                        <i class="fas fa-user"></i> Last Name
+                                    </label>
+                                    <input type="text" id="lastName" name="lastName" value="Sharma" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">
+                                    <i class="fas fa-envelope"></i> Email Address
+                                </label>
+                                <input type="email" id="email" name="email" value="sharma.kitchen@email.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">
+                                    <i class="fas fa-phone"></i> Phone Number
+                                </label>
+                                <input type="tel" id="phone" name="phone" value="9876543211" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">
+                                    <i class="fas fa-home"></i> Kitchen Address
+                                </label>
+                                <textarea id="address" name="address" rows="3" required>#45, 4th Block, Koramangala, Bangalore, Karnataka - 560034</textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="experience">
+                                        <i class="fas fa-calendar"></i> Years of Experience
+                                    </label>
+                                    <input type="number" id="experience" name="experience" value="5" min="1" max="50">
+                                </div>
+                                <div class="form-group">
+                                    <label for="languages">
+                                        <i class="fas fa-language"></i> Languages Known
+                                    </label>
+                                    <input type="text" id="languages" name="languages" value="Hindi, English, Kannada" placeholder="Enter languages">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="about">
+                                    <i class="fas fa-info-circle"></i> About Yourself
+                                </label>
+                                <textarea id="about" name="about" rows="3" placeholder="Tell us about yourself and your cooking journey...">Passionate home cook with 5+ years of experience in traditional North Indian cuisine. Love to bring authentic flavors to people's homes.</textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Personal Info
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="resetForm('personalInfoForm')">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Banking Details Section -->
+                <div id="banking-section" class="profile-section hidden">
+                    <div class="section-content">
+                        <div class="form-header">
+                            <div class="form-header-icon banking-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="form-header-content">
+                                <h3>Banking Details</h3>
+                                <p>Manage your bank account and payment settings</p>
+                            </div>
+                        </div>
+                        
+                        <div class="banking-info">
+                            <div class="info-card">
+                                <h4>Current Bank Account</h4>
+                                <div class="bank-details">
+                                    <p><strong>Bank Name:</strong> State Bank of India</p>
+                                    <p><strong>Account Number:</strong> ****1234</p>
+                                    <p><strong>Account Holder:</strong> Mrs. Sharma</p>
+                                    <p><strong>IFSC Code:</strong> SBIN0001234</p>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" onclick="showBankingForm()">
+                                    <i class="fas fa-edit"></i> Update Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <form id="bankingForm" class="profile-form hidden">
+                            <div class="form-group">
+                                <label for="bankName">
+                                    <i class="fas fa-university"></i> Bank Name
+                                </label>
+                                <input type="text" id="bankName" name="bankName" placeholder="Enter bank name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="accountNumber">
+                                    <i class="fas fa-credit-card"></i> Account Number
+                                </label>
+                                <input type="text" id="accountNumber" name="accountNumber" placeholder="Enter account number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="accountHolder">
+                                    <i class="fas fa-user"></i> Account Holder Name
+                                </label>
+                                <input type="text" id="accountHolder" name="accountHolder" placeholder="Enter account holder name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ifscCode">
+                                    <i class="fas fa-qrcode"></i> IFSC Code
+                                </label>
+                                <input type="text" id="ifscCode" name="ifscCode" placeholder="Enter IFSC code" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="accountType">
+                                    <i class="fas fa-wallet"></i> Account Type
+                                </label>
+                                <select id="accountType" name="accountType" required>
+                                    <option value="">Select Account Type</option>
+                                    <option value="savings">Savings Account</option>
+                                    <option value="current">Current Account</option>
+                                </select>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Banking Details
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="hideBankingForm()">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="payment-settings">
+                            <h4>Payment Settings</h4>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <strong>Auto-accept Payments</strong>
+                                    <p>Automatically accept payment requests from customers</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <strong>Payment Notifications</strong>
+                                    <p>Receive SMS/email for payment confirmations</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Cooks</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="menu.html">Manage Menu</a></li>
+                        <li><a href="orders.html">Orders</a></li>
+                        <li><a href="earnings.html">Earnings</a></li>
+                        <li><a href="#">Cook Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Profile specific JavaScript
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.profile-section');
+            sections.forEach(section => section.classList.add('hidden'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionName + '-section');
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+            
+            // Add active class to clicked tab
+            const activeTab = event.target;
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+        }
+
+        function showBankingForm() {
+            document.getElementById('bankingForm').classList.remove('hidden');
+        }
+
+        function hideBankingForm() {
+            document.getElementById('bankingForm').classList.add('hidden');
+        }
+
+        function resetForm(formId) {
+            document.getElementById(formId).reset();
+        }
+
+        function editBusinessInfo() {
+            // Show the business form section
+            showSection('business');
+            // Scroll to the form
+            document.getElementById('business-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function editPersonalInfo() {
+            // Show the personal form section
+            showSection('personal');
+            // Scroll to the form
+            document.getElementById('personal-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function editBankingDetails() {
+            // Show the banking form section
+            showSection('banking');
+            // Scroll to the form
+            document.getElementById('banking-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            // Remove any existing messages
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            // Insert at the top of page container
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Avatar upload handling
+        document.getElementById('avatarInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('avatarImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form submissions
+        document.getElementById('businessInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showMessage('Business information updated successfully!', 'success');
+        });
+
+        document.getElementById('personalInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showMessage('Personal information updated successfully!', 'success');
+        });
+
+        document.getElementById('bankingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showMessage('Banking details updated successfully!', 'success');
+            hideBankingForm();
+        });
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Load cook data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            if (!currentUser) return;
+
+            const nameEl = document.getElementById('profileName');
+            if (nameEl) {
+                nameEl.textContent = currentUser.name || 'Cook';
+            }
+            
+            // Show only business section by default
+            showSectionByName('business');
+        });
+
+        function showSectionByName(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.profile-section');
+            sections.forEach(section => section.classList.add('hidden'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionName + '-section');
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+            
+            // Add active class to corresponding tab
+            tabs.forEach(tab => {
+                if (tab.getAttribute('onclick').includes(sectionName)) {
+                    tab.classList.add('active');
+                }
+            });
+        }
+    </script>
+
+    <style>
+        /* Additional styles for cook profile */
+        .cook-rating-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .rating-stars {
+            color: #ff6b35;
+            font-size: 1.2rem;
+        }
+
+        .timing-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .timing-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .timing-item label {
+            min-width: 120px;
+            font-weight: 500;
+        }
+
+        .timing-item input[type="time"] {
+            padding: 8px;
+            border: 2px solid #e1e5e9;
+            border-radius: 5px;
+        }
+
+        .banking-info {
+            margin-bottom: 2rem;
+        }
+
+        .bank-details p {
+            margin: 0.5rem 0;
+        }
+
+        .payment-settings {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e1e5e9;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .setting-info strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .setting-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #ff6b35;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</body>
+</html>
+
+

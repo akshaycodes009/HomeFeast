@@ -1,0 +1,555 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Reports - AkshayFeast Admin | Homemade Tiffin Service</title>
+    <meta name="description" content="Generate comprehensive platform analytics, view performance reports, and track business metrics on AkshayFeast platform.">
+    <meta name="keywords" content="admin reports, platform analytics, business metrics, homemade food, tiffin service">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/admin-enhanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="report-management-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast Admin</h2>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="users.html">Users</a>
+                <a href="cooks.html">Cooks</a>
+                <a href="orders.html">Orders</a>
+                <a href="complaints.html">Complaints</a>
+                <a href="reports.html" class="active">Reports</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutAdmin()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Platform Reports 📊</h1>
+                    <p class="page-subtitle">Generate and view comprehensive platform analytics</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="generateFullReport()">
+                        <i class="fas fa-file-export"></i> Generate Full Report
+                    </button>
+                    <button class="btn btn-secondary" onclick="scheduleReport()">
+                        <i class="fas fa-calendar-alt"></i> Schedule Report
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-value">18.5%</div>
+                    <div class="stat-label">Monthly Growth</div>
+                    <div class="stat-change positive">+3.2% from last month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-value">₹4.56L</div>
+                    <div class="stat-label">Monthly Revenue</div>
+                    <div class="stat-change positive">+18% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value">1,408</div>
+                    <div class="stat-label">Active Users</div>
+                    <div class="stat-change positive">+12% this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value">4.7</div>
+                    <div class="stat-label">Platform Rating</div>
+                    <div class="stat-change positive">+0.1 this month</div>
+                </div>
+            </div>
+
+            <!-- Report Filters -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Report Configuration</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="resetFilters()">Reset All</button>
+                </div>
+                
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="reportType">Report Type</label>
+                        <select id="reportType">
+                            <option value="comprehensive">Comprehensive Report</option>
+                            <option value="financial">Financial Report</option>
+                            <option value="operational">Operational Report</option>
+                            <option value="customer">Customer Analytics</option>
+                            <option value="cook">Cook Performance</option>
+                            <option value="custom">Custom Report</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateRange">Date Range</label>
+                        <select id="dateRange">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">This Quarter</option>
+                            <option value="year">This Year</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportFormat">Export Format</label>
+                        <select id="reportFormat">
+                            <option value="pdf">PDF Report</option>
+                            <option value="excel">Excel Spreadsheet</option>
+                            <option value="csv">CSV Data</option>
+                            <option value="json">JSON Data</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailReport">Email Report</label>
+                        <input type="email" id="emailReport" placeholder="Enter email address...">
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+                    <button class="btn btn-secondary" onclick="previewReport()">Preview</button>
+                    <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+                </div>
+            </div>
+
+            <!-- Key Performance Indicators -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Key Performance Indicators</h2>
+                    <div class="performance-summary">
+                        <span class="performance-stat">Last 30 days</span>
+                        <span class="performance-change">Updated hourly</span>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-title">Total Revenue</div>
+                        <div class="report-value">₹4,56,789</div>
+                        <div class="report-subtitle">+18% from last month</div>
+                        <div class="report-sparkline positive">📈</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Active Orders</div>
+                        <div class="report-value">3,456</div>
+                        <div class="report-subtitle">+15% from last month</div>
+                        <div class="report-sparkline positive">📈</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Customer Retention</div>
+                        <div class="report-value">78.4%</div>
+                        <div class="report-subtitle">+2.1% improvement</div>
+                        <div class="report-sparkline positive">📈</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Avg Order Value</div>
+                        <div class="report-value">₹132</div>
+                        <div class="report-subtitle">+5% this week</div>
+                        <div class="report-sparkline positive">📈</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Delivery Success Rate</div>
+                        <div class="report-value">96.8%</div>
+                        <div class="report-subtitle">-0.2% from target</div>
+                        <div class="report-sparkline negative">📉</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Customer Satisfaction</div>
+                        <div class="report-value">4.7/5</div>
+                        <div class="report-subtitle">+0.1 this month</div>
+                        <div class="report-sparkline positive">📈</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revenue Analytics -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Revenue Analytics</h2>
+                    <div class="performance-summary">
+                        <span class="performance-stat">₹4.56L total</span>
+                        <span class="performance-change">+18% growth</span>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Monthly Revenue Trend</h3>
+                        <div class="chart-legend">
+                            <span class="legend-item">Revenue</span>
+                            <span class="legend-item">Orders</span>
+                            <span class="legend-item">Profit</span>
+                        </div>
+                    </div>
+                    <div class="chart-bars">
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 70%">
+                                <span class="bar-value">₹3.2L</span>
+                            </div>
+                            <span class="bar-label">Aug</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 75%">
+                                <span class="bar-value">₹3.4L</span>
+                            </div>
+                            <span class="bar-label">Sep</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 80%">
+                                <span class="bar-value">₹3.6L</span>
+                            </div>
+                            <span class="bar-label">Oct</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 85%">
+                                <span class="bar-value">₹3.8L</span>
+                            </div>
+                            <span class="bar-label">Nov</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 90%">
+                                <span class="bar-value">₹4.0L</span>
+                            </div>
+                            <span class="bar-label">Dec</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar-fill" style="height: 95%">
+                                <span class="bar-value">₹4.2L</span>
+                            </div>
+                            <span class="bar-label">Jan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Analytics -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">User Analytics</h2>
+                    <div class="performance-summary">
+                        <span class="performance-stat">1,408 active</span>
+                        <span class="performance-change">+12% growth</span>
+                    </div>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-title">Total Users</div>
+                        <div class="report-value">1,248</div>
+                        <div class="report-subtitle">+12% this month</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Daily Active Users</div>
+                        <div class="report-value">342</div>
+                        <div class="report-subtitle">Last 24 hours</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">New Registrations</div>
+                        <div class="report-value">28</div>
+                        <div class="report-subtitle">Today</div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">User Retention</div>
+                        <div class="report-value">78.4%</div>
+                        <div class="report-subtitle">30-day retention</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cook Performance -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Cook Performance</h2>
+                    <div class="performance-summary">
+                        <span class="performance-stat">156 active</span>
+                        <span class="performance-change">+8% growth</span>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Cook Name</th>
+                                <th>Orders</th>
+                                <th>Revenue</th>
+                                <th>Rating</th>
+                                <th>Completion Rate</th>
+                                <th>Avg Time</th>
+                                <th>Performance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sharma's Kitchen</strong></td>
+                                <td>156</td>
+                                <td>₹18,720</td>
+                                <td>⭐ 4.8</td>
+                                <td>98.7%</td>
+                                <td>28 min</td>
+                                <td><span class="badge badge-success">Excellent</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mom's Recipes</strong></td>
+                                <td>89</td>
+                                <td>₹13,350</td>
+                                <td>⭐ 4.9</td>
+                                <td>97.8%</td>
+                                <td>25 min</td>
+                                <td><span class="badge badge-success">Excellent</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Homely Meals</strong></td>
+                                <td>124</td>
+                                <td>₹12,400</td>
+                                <td>⭐ 4.7</td>
+                                <td>96.0%</td>
+                                <td>32 min</td>
+                                <td><span class="badge badge-success">Good</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Punjabi Dhaba</strong></td>
+                                <td>67</td>
+                                <td>₹10,050</td>
+                                <td>⭐ 4.9</td>
+                                <td>95.5%</td>
+                                <td>30 min</td>
+                                <td><span class="badge badge-success">Good</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Healthy Bites</strong></td>
+                                <td>92</td>
+                                <td>₹13,800</td>
+                                <td>⭐ 4.7</td>
+                                <td>94.6%</td>
+                                <td>35 min</td>
+                                <td><span class="badge badge-warning">Average</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recent Reports -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Generated Reports</h2>
+                    <button class="btn btn-secondary btn-sm" onclick="viewAllReports()">View All</button>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-title">Monthly Performance</div>
+                        <div class="report-value">Jan 2026</div>
+                        <div class="report-subtitle">Generated 2 days ago</div>
+                        <div class="report-actions">
+                            <button class="btn btn-primary btn-sm" onclick="downloadReport('RPT001')">Download</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewReport('RPT001')">View</button>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Financial Summary</div>
+                        <div class="report-value">Q4 2025</div>
+                        <div class="report-subtitle">Generated 1 week ago</div>
+                        <div class="report-actions">
+                            <button class="btn btn-primary btn-sm" onclick="downloadReport('RPT002')">Download</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewReport('RPT002')">View</button>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Customer Analytics</div>
+                        <div class="report-value">Dec 2025</div>
+                        <div class="report-subtitle">Generated 2 weeks ago</div>
+                        <div class="report-actions">
+                            <button class="btn btn-primary btn-sm" onclick="downloadReport('RPT003')">Download</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewReport('RPT003')">View</button>
+                        </div>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-title">Cook Performance</div>
+                        <div class="report-value">Nov 2025</div>
+                        <div class="report-subtitle">Generated 3 weeks ago</div>
+                        <div class="report-actions">
+                            <button class="btn btn-primary btn-sm" onclick="downloadReport('RPT004')">Download</button>
+                            <button class="btn btn-secondary btn-sm" onclick="viewReport('RPT004')">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast Admin</h3>
+                    </div>
+                    <p>Managing homemade food delivery platform efficiently</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="users.html">User Management</a></li>
+                        <li><a href="cooks.html">Cook Management</a></li>
+                        <li><a href="orders.html">Order Monitoring</a></li>
+                        <li><a href="#">Admin Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Reports & Analytics</h4>
+                    <ul>
+                        <li><a href="#kpi">Key Performance</a></li>
+                        <li><a href="#revenue">Revenue Analytics</a></li>
+                        <li><a href="#users">User Analytics</a></li>
+                        <li><a href="#cooks">Cook Performance</a></li>
+                        <li><a href="#">Custom Reports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> admin@AkshayFeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> 24/7 Support</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Admin Reports functionality
+        function generateFullReport() {
+            console.log('Generating full report...');
+            showMessage('Generating comprehensive platform report...', 'info');
+        }
+
+        function scheduleReport() {
+            console.log('Opening report scheduler...');
+            showMessage('Opening report scheduler...', 'info');
+        }
+
+        function generateReport() {
+            const reportType = document.getElementById('reportType').value;
+            const dateRange = document.getElementById('dateRange').value;
+            const format = document.getElementById('reportFormat').value;
+            
+            console.log('Generating report:', { reportType, dateRange, format });
+            showMessage(`Generating ${reportType} report for ${dateRange}...`, 'info');
+        }
+
+        function previewReport() {
+            console.log('Previewing report...');
+            showMessage('Generating report preview...', 'info');
+        }
+
+        function resetFilters() {
+            document.getElementById('reportType').value = 'comprehensive';
+            document.getElementById('dateRange').value = 'month';
+            document.getElementById('reportFormat').value = 'pdf';
+            document.getElementById('emailReport').value = '';
+            showMessage('Filters reset successfully', 'info');
+        }
+
+        function downloadReport(reportId) {
+            console.log('Downloading report:', reportId);
+            showMessage('Downloading report...', 'success');
+        }
+
+        function viewReport(reportId) {
+            console.log('Viewing report:', reportId);
+            showMessage('Opening report viewer...', 'info');
+        }
+
+        function viewAllReports() {
+            console.log('Viewing all reports...');
+            showMessage('Opening reports archive...', 'info');
+        }
+
+        function logoutAdmin() {
+            if (confirm('Are you sure you want to logout from admin panel?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage && !existingMessage.classList.contains('notification-info')) {
+                existingMessage.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
+                    
+
+

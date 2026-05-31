@@ -1,0 +1,586 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Menu - AkshayFeast | Homemade Tiffin Service</title>
+    <meta name="description" content="Manage your homemade food menu, update prices, and control meal availability with AkshayFeast.">
+    <meta name="keywords" content="cook menu, manage menu, homemade food pricing, tiffin service menu">
+    <link rel="stylesheet" href="../assets/css/user-common.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/menu-enhanced.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../assets/images/logo.png" alt="AkshayFeast Logo" class="logo-img">
+                <h2>AkshayFeast</h2>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="menu.html">Manage Menu</a>
+                <a href="orders.html">Orders</a>
+                <a href="earnings.html">Earnings</a>
+                <a href="profile.html">My Profile</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" onclick="logoutUser()" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Manage Menu 🍽️</h1>
+                    <p class="page-subtitle">Update your menu items and pricing</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn-primary" onclick="showAddItemForm()">
+                        <i class="fas fa-plus"></i> Add New Item
+                    </button>
+                    <button class="btn btn-secondary" onclick="duplicateMenu()">
+                        <i class="fas fa-copy"></i> Copy to Other Days
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="stat-value">25</div>
+                    <div class="stat-label">Total Menu Items</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="stat-value">7</div>
+                    <div class="stat-label">Days Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <div class="stat-value">₹120</div>
+                    <div class="stat-label">Daily Price</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-value">4.8</div>
+                    <div class="stat-label">Menu Rating</div>
+                </div>
+            </div>
+
+        <!-- Menu Settings -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Menu Settings</h2>
+                    <button class="btn btn-primary" onclick="saveMenuSettings()">Save Settings</button>
+                </div>
+                
+                <div class="menu-settings-grid">
+                    <div class="setting-card">
+                        <h4>Basic Information</h4>
+                        <div class="form-group">
+                            <label for="kitchenName">Kitchen Name</label>
+                            <input type="text" id="kitchenName" value="Sharma's Kitchen" placeholder="Enter your kitchen name">
+                        </div>
+                        <div class="form-group">
+                            <label for="kitchenDescription">Description</label>
+                            <textarea id="kitchenDescription" rows="3" placeholder="Describe your kitchen and cooking style...">Homely North Indian food prepared with love and hygiene. Specializing in traditional Rajasthani and Punjabi cuisine.</textarea>
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <h4>Cuisine & Meal Type</h4>
+                        <div class="form-group">
+                            <label for="cuisineType">Primary Cuisine</label>
+                            <select id="cuisineType">
+                                <option value="north-indian" selected>North Indian</option>
+                                <option value="south-indian">South Indian</option>
+                                <option value="maharashtrian">Maharashtrian</option>
+                                <option value="punjabi">Punjabi</option>
+                                <option value="chinese">Chinese</option>
+                                <option value="continental">Continental</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mealType">Meal Type</label>
+                            <select id="mealType">
+                                <option value="veg" selected>Vegetarian</option>
+                                <option value="non-veg">Non-Vegetarian</option>
+                                <option value="both">Both</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <h4>Pricing</h4>
+                        <div class="form-group">
+                            <label for="dailyPrice">Daily Price (₹)</label>
+                            <input type="number" id="dailyPrice" value="120" min="50" max="500" placeholder="Enter daily price">
+                        </div>
+                        <div class="form-group">
+                            <label for="weeklyPrice">Weekly Price (₹)</label>
+                            <input type="number" id="weeklyPrice" value="840" min="300" max="3000" placeholder="Enter weekly price">
+                        </div>
+                        <div class="form-group">
+                            <label for="monthlyPrice">Monthly Price (₹)</label>
+                            <input type="number" id="monthlyPrice" value="3600" min="1000" max="10000" placeholder="Enter monthly price">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Menu -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Weekly Menu</h2>
+                    <div class="menu-actions">
+                        <button class="btn btn-secondary" onclick="duplicateCurrentDay()">Copy Current Day</button>
+                        <button class="btn btn-secondary" onclick="clearCurrentDay()">Clear Current Day</button>
+                    </div>
+                </div>
+                
+                <div class="menu-tabs">
+                    <button class="tab-btn active" onclick="showDayMenu('monday')">Monday</button>
+                    <button class="tab-btn" onclick="showDayMenu('tuesday')">Tuesday</button>
+                    <button class="tab-btn" onclick="showDayMenu('wednesday')">Wednesday</button>
+                    <button class="tab-btn" onclick="showDayMenu('thursday')">Thursday</button>
+                    <button class="tab-btn" onclick="showDayMenu('friday')">Friday</button>
+                    <button class="tab-btn" onclick="showDayMenu('saturday')">Saturday</button>
+                    <button class="tab-btn" onclick="showDayMenu('sunday')">Sunday</button>
+                </div>
+
+                <div class="day-menu" id="monday-menu">
+                    <div class="day-header">
+                        <h3>Monday Menu</h3>
+                        <div class="day-stats">
+                            <span class="stat-item">5 items</span>
+                            <span class="stat-item">₹120/day</span>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-items-grid">
+                        <div class="menu-item-card">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <h4>Dal Makhani</h4>
+                                    <span class="item-category">Main Course</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="btn btn-sm btn-secondary" onclick="editMenuItem('dal-makhani')">Edit</button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteMenuItem('dal-makhani')">Delete</button>
+                                </div>
+                            </div>
+                            <div class="item-description">
+                                <p>Creamy black lentils cooked with butter and spices</p>
+                            </div>
+                            <div class="item-meta">
+                                <span class="item-availability">Available All Days</span>
+                                <span class="item-rating">⭐ 4.8</span>
+                            </div>
+                        </div>
+
+                        <div class="menu-item-card">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <h4>Jeera Rice</h4>
+                                    <span class="item-category">Rice</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="btn btn-sm btn-secondary" onclick="editMenuItem('jeera-rice')">Edit</button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteMenuItem('jeera-rice')">Delete</button>
+                                </div>
+                            </div>
+                            <div class="item-description">
+                                <p>Basmati rice flavored with cumin seeds</p>
+                            </div>
+                            <div class="item-meta">
+                                <span class="item-availability">Available All Days</span>
+                                <span class="item-rating">⭐ 4.6</span>
+                            </div>
+                        </div>
+
+                        <div class="menu-item-card">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <h4>Mixed Veg Sabzi</h4>
+                                    <span class="item-category">Side Dish</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="btn btn-sm btn-secondary" onclick="editMenuItem('mixed-veg')">Edit</button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteMenuItem('mixed-veg')">Delete</button>
+                                </div>
+                            </div>
+                            <div class="item-description">
+                                <p>Seasonal vegetables cooked with Indian spices</p>
+                            </div>
+                            <div class="item-meta">
+                                <span class="item-availability">Monday, Wednesday, Friday</span>
+                                <span class="item-rating">⭐ 4.7</span>
+                            </div>
+                        </div>
+
+                        <div class="menu-item-card">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <h4>Roti (2 pcs)</h4>
+                                    <span class="item-category">Bread</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="btn btn-sm btn-secondary" onclick="editMenuItem('roti')">Edit</button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteMenuItem('roti')">Delete</button>
+                                </div>
+                            </div>
+                            <div class="item-description">
+                                <p>Fresh whole wheat flatbread</p>
+                            </div>
+                            <div class="item-meta">
+                                <span class="item-availability">Available All Days</span>
+                                <span class="item-rating">⭐ 4.9</span>
+                            </div>
+                        </div>
+
+                        <div class="menu-item-card">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <h4>Fresh Salad</h4>
+                                    <span class="item-category">Salad</span>
+                                </div>
+                                <div class="item-actions">
+                                    <button class="btn btn-sm btn-secondary" onclick="editMenuItem('salad')">Edit</button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteMenuItem('salad')">Delete</button>
+                                </div>
+                            </div>
+                            <div class="item-description">
+                                <p>Fresh cucumber, tomato, onion salad</p>
+                            </div>
+                            <div class="item-meta">
+                                <span class="item-availability">Available All Days</span>
+                                <span class="item-rating">⭐ 4.5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular Items -->
+            <div class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Popular Items</h2>
+                    <span class="badge badge-success">Top Rated</span>
+                </div>
+                
+                <div class="popular-items-grid">
+                    <div class="popular-item">
+                        <div class="item-rank">#1</div>
+                        <div class="item-content">
+                            <h4>Dal Makhani</h4>
+                            <p>Ordered 156 times this month</p>
+                            <div class="item-stats">
+                                <span class="rating">⭐ 4.8</span>
+                                <span class="orders">156 orders</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popular-item">
+                        <div class="item-rank">#2</div>
+                        <div class="item-content">
+                            <h4>Roti (2 pcs)</h4>
+                            <p>Ordered 142 times this month</p>
+                            <div class="item-stats">
+                                <span class="rating">⭐ 4.9</span>
+                                <span class="orders">142 orders</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popular-item">
+                        <div class="item-rank">#3</div>
+                        <div class="item-content">
+                            <h4>Mixed Veg Sabzi</h4>
+                            <p>Ordered 98 times this month</p>
+                            <div class="item-stats">
+                                <span class="rating">⭐ 4.7</span>
+                                <span class="orders">98 orders</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.png" alt="AkshayFeast" class="footer-logo-img">
+                        <h3>AkshayFeast</h3>
+                    </div>
+                    <p>Fresh homemade food delivered daily to your doorstep</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Cooks</h4>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="menu.html">Manage Menu</a></li>
+                        <li><a href="orders.html">Orders</a></li>
+                        <li><a href="earnings.html">Earnings</a></li>
+                        <li><a href="#">Cook Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><strong>Email:</strong> support@akshayfeast.com</p>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                        <p><strong>Hours:</strong> Mon-Sat, 9AM-9PM</p>
+                        <p><strong>Location:</strong> Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 AkshayFeast. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Refund Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add Item Modal -->
+    <div id="addItemModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Menu Item</h3>
+                <button class="modal-close" onclick="hideAddItemForm()">&times;</button>
+            </div>
+            <form id="addItemForm">
+                <div class="form-group">
+                    <label for="itemName">Item Name</label>
+                    <input type="text" id="itemName" required placeholder="Enter item name">
+                </div>
+                <div class="form-group">
+                    <label for="itemDescription">Description</label>
+                    <textarea id="itemDescription" rows="3" required placeholder="Describe your dish..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="itemCategory">Category</label>
+                    <select id="itemCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="main">Main Course</option>
+                        <option value="rice">Rice</option>
+                        <option value="bread">Bread/Roti</option>
+                        <option value="side">Side Dish</option>
+                        <option value="salad">Salad</option>
+                        <option value="dessert">Dessert</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="itemDays">Available Days</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" checked> Monday</label>
+                        <label><input type="checkbox" checked> Tuesday</label>
+                        <label><input type="checkbox" checked> Wednesday</label>
+                        <label><input type="checkbox" checked> Thursday</label>
+                        <label><input type="checkbox" checked> Friday</label>
+                        <label><input type="checkbox"> Saturday</label>
+                        <label><input type="checkbox"> Sunday</label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Add Item</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideAddItemForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Menu functionality
+        function showAddItemForm() {
+            document.getElementById('addItemModal').style.display = 'block';
+        }
+
+        function hideAddItemForm() {
+            document.getElementById('addItemModal').style.display = 'none';
+            document.getElementById('addItemForm').reset();
+        }
+
+        function saveMenuSettings() {
+            const kitchenName = document.getElementById('kitchenName').value;
+            const cuisineType = document.getElementById('cuisineType').value;
+            const mealType = document.getElementById('mealType').value;
+            const dailyPrice = document.getElementById('dailyPrice').value;
+            const weeklyPrice = document.getElementById('weeklyPrice').value;
+            const monthlyPrice = document.getElementById('monthlyPrice').value;
+
+            console.log('Saving menu settings:', {
+                kitchenName, cuisineType, mealType, dailyPrice, weeklyPrice, monthlyPrice
+            });
+
+            showMessage('Menu settings saved successfully!', 'success');
+        }
+
+        function showDayMenu(day) {
+            // Hide all day menus
+            const dayMenus = document.querySelectorAll('.day-menu');
+            dayMenus.forEach(menu => menu.style.display = 'none');
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected day menu
+            const selectedMenu = document.getElementById(day + '-menu');
+            if (selectedMenu) {
+                selectedMenu.style.display = 'block';
+            }
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function editMenuItem(itemId) {
+            console.log('Editing menu item:', itemId);
+            showMessage(`Editing ${itemId.replace('-', ' ')}`, 'info');
+            // Implement edit logic
+        }
+
+        function deleteMenuItem(itemId) {
+            if (confirm('Are you sure you want to delete this menu item?')) {
+                console.log('Deleting menu item:', itemId);
+                showMessage('Menu item deleted successfully!', 'success');
+                // Implement delete logic
+            }
+        }
+
+        function duplicateCurrentDay() {
+            if (confirm('Copy current day menu to other days?')) {
+                console.log('Duplicating current day menu');
+                showMessage('Menu copied to other days successfully!', 'success');
+                // Implement duplicate logic
+            }
+        }
+
+        function duplicateMenu() {
+            if (confirm('Copy Monday menu to all other days?')) {
+                console.log('Duplicating menu');
+                showMessage('Menu duplicated successfully!', 'success');
+                // Implement duplicate logic
+            }
+        }
+
+        function clearCurrentDay() {
+            if (confirm('Clear all items from current day? This action cannot be undone.')) {
+                console.log('Clearing current day menu');
+                showMessage('Current day menu cleared', 'info');
+                // Implement clear logic
+            }
+        }
+
+        function logoutUser() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                localStorage.clear();
+                window.location.href = '../login.html';
+            }
+        }
+
+        function showMessage(message, type) {
+            // Remove any existing messages
+            const existingMessage = document.querySelector('.notification');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `notification notification-${type}`;
+            messageDiv.textContent = message;
+            
+            // Insert at the top of page container
+            const pageContainer = document.querySelector('.page-container');
+            if (pageContainer) {
+                pageContainer.insertBefore(messageDiv, pageContainer.firstChild);
+            }
+            
+            // Remove message after 5 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Form submission
+        document.getElementById('addItemForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const itemName = document.getElementById('itemName').value;
+            const itemDescription = document.getElementById('itemDescription').value;
+            const itemCategory = document.getElementById('itemCategory').value;
+
+            console.log('Adding new menu item:', { itemName, itemDescription, itemCategory });
+
+            showMessage('Menu item added successfully!', 'success');
+            hideAddItemForm();
+        });
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('addItemModal');
+            if (event.target === modal) {
+                hideAddItemForm();
+            }
+        });
+    </script>
+</body>
+</html>
+
+
